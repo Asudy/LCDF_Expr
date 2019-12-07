@@ -1,0 +1,103 @@
+////////////////////////////////////////////////////////////////////////////////
+// Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+////////////////////////////////////////////////////////////////////////////////
+//   ____  ____ 
+//  /   /\/   / 
+// /___/  \  /    Vendor: Xilinx 
+// \   \   \/     Version : 14.7
+//  \   \         Application : sch2hdl
+//  /   /         Filename : AddSub4b.vf
+// /___/   /\     Timestamp : 12/04/2019 20:29:19
+// \   \  /  \ 
+//  \___\/\___\ 
+//
+//Command: sch2hdl -intstyle ise -family kintex7 -verilog E:/wjz/Expr12/MyALUTrans/AddSub4b.vf -w E:/wjz/Expr12/MyALUTrans/AddSub4b.sch
+//Design Name: AddSub4b
+//Device: kintex7
+//Purpose:
+//    This verilog netlist is translated from an ECS schematic.It can be 
+//    synthesized and simulated, but it should not be modified. 
+//
+`timescale 1ns / 1ps
+
+module AddSub1b_MUSER_AddSub4b(A, 
+                               B, 
+                               C, 
+                               Ctrl, 
+                               Co, 
+                               S);
+
+    input A;
+    input B;
+    input C;
+    input Ctrl;
+   output Co;
+   output S;
+   
+   wire XLXN_4;
+   wire XLXN_11;
+   wire XLXN_20;
+   wire XLXN_21;
+   
+   XOR2  XLXI_2 (.I0(XLXN_4), 
+                .I1(A), 
+                .O(XLXN_11));
+   XOR2  XLXI_3 (.I0(C), 
+                .I1(XLXN_11), 
+                .O(S));
+   AND2  XLXI_5 (.I0(A), 
+                .I1(XLXN_4), 
+                .O(XLXN_21));
+   AND2  XLXI_6 (.I0(XLXN_11), 
+                .I1(C), 
+                .O(XLXN_20));
+   OR2  XLXI_15 (.I0(XLXN_21), 
+                .I1(XLXN_20), 
+                .O(Co));
+   XOR2  XLXI_16 (.I0(Ctrl), 
+                 .I1(B), 
+                 .O(XLXN_4));
+endmodule
+`timescale 1ns / 1ps
+
+module AddSub4b(A, 
+                B, 
+                Ctrl, 
+                Co, 
+                S);
+
+    input [3:0] A;
+    input [3:0] B;
+    input Ctrl;
+   output Co;
+   output [3:0] S;
+   
+   wire XLXN_12;
+   wire XLXN_15;
+   wire XLXN_17;
+   
+   AddSub1b_MUSER_AddSub4b  XLXI_2 (.A(A[0]), 
+                                   .B(B[0]), 
+                                   .C(Ctrl), 
+                                   .Ctrl(Ctrl), 
+                                   .Co(XLXN_12), 
+                                   .S(S[0]));
+   AddSub1b_MUSER_AddSub4b  XLXI_4 (.A(A[1]), 
+                                   .B(B[1]), 
+                                   .C(XLXN_12), 
+                                   .Ctrl(Ctrl), 
+                                   .Co(XLXN_15), 
+                                   .S(S[1]));
+   AddSub1b_MUSER_AddSub4b  XLXI_5 (.A(A[2]), 
+                                   .B(B[2]), 
+                                   .C(XLXN_15), 
+                                   .Ctrl(Ctrl), 
+                                   .Co(XLXN_17), 
+                                   .S(S[2]));
+   AddSub1b_MUSER_AddSub4b  XLXI_6 (.A(A[3]), 
+                                   .B(B[3]), 
+                                   .C(XLXN_17), 
+                                   .Ctrl(Ctrl), 
+                                   .Co(Co), 
+                                   .S(S[3]));
+endmodule

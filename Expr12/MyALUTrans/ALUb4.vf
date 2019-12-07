@@ -1,0 +1,381 @@
+////////////////////////////////////////////////////////////////////////////////
+// Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+////////////////////////////////////////////////////////////////////////////////
+//   ____  ____ 
+//  /   /\/   / 
+// /___/  \  /    Vendor: Xilinx 
+// \   \   \/     Version : 14.7
+//  \   \         Application : sch2hdl
+//  /   /         Filename : ALUb4.vf
+// /___/   /\     Timestamp : 12/04/2019 20:29:19
+// \   \  /  \ 
+//  \___\/\___\ 
+//
+//Command: sch2hdl -intstyle ise -family kintex7 -verilog E:/wjz/Expr12/MyALUTrans/ALUb4.vf -w E:/wjz/Expr12/MyALUTrans/ALUb4.sch
+//Design Name: ALUb4
+//Device: kintex7
+//Purpose:
+//    This verilog netlist is translated from an ECS schematic.It can be 
+//    synthesized and simulated, but it should not be modified. 
+//
+`timescale 1ns / 1ps
+
+module Mux4to1_MUSER_ALUb4(I0, 
+                           I1, 
+                           I2, 
+                           I3, 
+                           s, 
+                           o);
+
+    input I0;
+    input I1;
+    input I2;
+    input I3;
+    input [1:0] s;
+   output o;
+   
+   wire NS0;
+   wire NS1;
+   wire S0;
+   wire S1;
+   wire S2;
+   wire S3;
+   wire XLXN_66;
+   wire XLXN_67;
+   wire XLXN_68;
+   wire XLXN_69;
+   
+   INV  XLXI_1 (.I(s[0]), 
+               .O(NS0));
+   INV  XLXI_2 (.I(s[1]), 
+               .O(NS1));
+   AND2  XLXI_7 (.I0(NS0), 
+                .I1(NS1), 
+                .O(S0));
+   AND2  XLXI_8 (.I0(s[0]), 
+                .I1(NS1), 
+                .O(S1));
+   AND2  XLXI_9 (.I0(NS0), 
+                .I1(s[1]), 
+                .O(S2));
+   AND2  XLXI_10 (.I0(s[1]), 
+                 .I1(s[0]), 
+                 .O(S3));
+   AND2  XLXI_29 (.I0(I3), 
+                 .I1(S3), 
+                 .O(XLXN_69));
+   AND2  XLXI_30 (.I0(I1), 
+                 .I1(S1), 
+                 .O(XLXN_67));
+   AND2  XLXI_31 (.I0(I2), 
+                 .I1(S2), 
+                 .O(XLXN_68));
+   AND2  XLXI_32 (.I0(I0), 
+                 .I1(S0), 
+                 .O(XLXN_66));
+   OR4  XLXI_47 (.I0(XLXN_69), 
+                .I1(XLXN_68), 
+                .I2(XLXN_67), 
+                .I3(XLXN_66), 
+                .O(o));
+endmodule
+`timescale 1ns / 1ps
+
+module Mux4to1b4_MUSER_ALUb4(I0, 
+                             I1, 
+                             I2, 
+                             I3, 
+                             s, 
+                             o);
+
+    input [3:0] I0;
+    input [3:0] I1;
+    input [3:0] I2;
+    input [3:0] I3;
+    input [1:0] s;
+   output [3:0] o;
+   
+   wire NS0;
+   wire NS1;
+   wire S0;
+   wire S1;
+   wire S2;
+   wire S3;
+   wire XLXN_55;
+   wire XLXN_56;
+   wire XLXN_57;
+   wire XLXN_58;
+   wire XLXN_59;
+   wire XLXN_60;
+   wire XLXN_61;
+   wire XLXN_62;
+   wire XLXN_63;
+   wire XLXN_64;
+   wire XLXN_65;
+   wire XLXN_66;
+   wire XLXN_67;
+   wire XLXN_68;
+   wire XLXN_69;
+   wire XLXN_70;
+   
+   INV  XLXI_1 (.I(s[1]), 
+               .O(NS1));
+   INV  XLXI_2 (.I(s[0]), 
+               .O(NS0));
+   AND2  XLXI_7 (.I0(NS0), 
+                .I1(NS1), 
+                .O(S0));
+   AND2  XLXI_8 (.I0(s[0]), 
+                .I1(NS1), 
+                .O(S1));
+   AND2  XLXI_9 (.I0(NS0), 
+                .I1(s[1]), 
+                .O(S2));
+   AND2  XLXI_10 (.I0(s[1]), 
+                 .I1(s[0]), 
+                 .O(S3));
+   AND2  XLXI_39 (.I0(I0[0]), 
+                 .I1(S0), 
+                 .O(XLXN_55));
+   AND2  XLXI_40 (.I0(I2[0]), 
+                 .I1(S2), 
+                 .O(XLXN_57));
+   AND2  XLXI_41 (.I0(I1[0]), 
+                 .I1(S1), 
+                 .O(XLXN_56));
+   AND2  XLXI_42 (.I0(I3[0]), 
+                 .I1(S3), 
+                 .O(XLXN_58));
+   OR4  XLXI_83 (.I0(XLXN_58), 
+                .I1(XLXN_57), 
+                .I2(XLXN_56), 
+                .I3(XLXN_55), 
+                .O(o[0]));
+   AND2  XLXI_84 (.I0(I0[1]), 
+                 .I1(S0), 
+                 .O(XLXN_59));
+   AND2  XLXI_85 (.I0(I2[1]), 
+                 .I1(S2), 
+                 .O(XLXN_61));
+   AND2  XLXI_86 (.I0(I1[1]), 
+                 .I1(S1), 
+                 .O(XLXN_60));
+   AND2  XLXI_87 (.I0(I3[1]), 
+                 .I1(S3), 
+                 .O(XLXN_62));
+   OR4  XLXI_88 (.I0(XLXN_62), 
+                .I1(XLXN_61), 
+                .I2(XLXN_60), 
+                .I3(XLXN_59), 
+                .O(o[1]));
+   AND2  XLXI_89 (.I0(I0[2]), 
+                 .I1(S0), 
+                 .O(XLXN_63));
+   AND2  XLXI_90 (.I0(I2[2]), 
+                 .I1(S2), 
+                 .O(XLXN_65));
+   AND2  XLXI_91 (.I0(I1[2]), 
+                 .I1(S1), 
+                 .O(XLXN_64));
+   AND2  XLXI_92 (.I0(I3[2]), 
+                 .I1(S3), 
+                 .O(XLXN_66));
+   OR4  XLXI_93 (.I0(XLXN_66), 
+                .I1(XLXN_65), 
+                .I2(XLXN_64), 
+                .I3(XLXN_63), 
+                .O(o[2]));
+   AND2  XLXI_94 (.I0(I0[3]), 
+                 .I1(S0), 
+                 .O(XLXN_67));
+   AND2  XLXI_95 (.I0(I2[3]), 
+                 .I1(S2), 
+                 .O(XLXN_69));
+   AND2  XLXI_96 (.I0(I1[3]), 
+                 .I1(S1), 
+                 .O(XLXN_68));
+   AND2  XLXI_97 (.I0(I3[3]), 
+                 .I1(S3), 
+                 .O(XLXN_70));
+   OR4  XLXI_98 (.I0(XLXN_70), 
+                .I1(XLXN_69), 
+                .I2(XLXN_68), 
+                .I3(XLXN_67), 
+                .O(o[3]));
+endmodule
+`timescale 1ns / 1ps
+
+module MyOR2b4_MUSER_ALUb4(A, 
+                           B, 
+                           C);
+
+    input [3:0] A;
+    input [3:0] B;
+   output [3:0] C;
+   
+   
+   OR2  XLXI_5 (.I0(B[0]), 
+               .I1(A[0]), 
+               .O(C[0]));
+   OR2  XLXI_7 (.I0(B[1]), 
+               .I1(A[1]), 
+               .O(C[1]));
+   OR2  XLXI_8 (.I0(B[2]), 
+               .I1(A[2]), 
+               .O(C[2]));
+   OR2  XLXI_9 (.I0(B[3]), 
+               .I1(A[3]), 
+               .O(C[3]));
+endmodule
+`timescale 1ns / 1ps
+
+module MyAND2b4_MUSER_ALUb4(A, 
+                            B, 
+                            C);
+
+    input [3:0] A;
+    input [3:0] B;
+   output [3:0] C;
+   
+   
+   AND2  XLXI_1 (.I0(B[0]), 
+                .I1(A[0]), 
+                .O(C[0]));
+   AND2  XLXI_2 (.I0(B[1]), 
+                .I1(A[1]), 
+                .O(C[1]));
+   AND2  XLXI_3 (.I0(B[2]), 
+                .I1(A[2]), 
+                .O(C[2]));
+   AND2  XLXI_4 (.I0(B[3]), 
+                .I1(A[3]), 
+                .O(C[3]));
+endmodule
+`timescale 1ns / 1ps
+
+module AddSub1b_MUSER_ALUb4(A, 
+                            B, 
+                            C, 
+                            Ctrl, 
+                            Co, 
+                            S);
+
+    input A;
+    input B;
+    input C;
+    input Ctrl;
+   output Co;
+   output S;
+   
+   wire XLXN_4;
+   wire XLXN_11;
+   wire XLXN_20;
+   wire XLXN_21;
+   
+   XOR2  XLXI_2 (.I0(XLXN_4), 
+                .I1(A), 
+                .O(XLXN_11));
+   XOR2  XLXI_3 (.I0(C), 
+                .I1(XLXN_11), 
+                .O(S));
+   AND2  XLXI_5 (.I0(A), 
+                .I1(XLXN_4), 
+                .O(XLXN_21));
+   AND2  XLXI_6 (.I0(XLXN_11), 
+                .I1(C), 
+                .O(XLXN_20));
+   OR2  XLXI_15 (.I0(XLXN_21), 
+                .I1(XLXN_20), 
+                .O(Co));
+   XOR2  XLXI_16 (.I0(Ctrl), 
+                 .I1(B), 
+                 .O(XLXN_4));
+endmodule
+`timescale 1ns / 1ps
+
+module AddSub4b_MUSER_ALUb4(A, 
+                            B, 
+                            Ctrl, 
+                            Co, 
+                            S);
+
+    input [3:0] A;
+    input [3:0] B;
+    input Ctrl;
+   output Co;
+   output [3:0] S;
+   
+   wire XLXN_12;
+   wire XLXN_15;
+   wire XLXN_17;
+   
+   AddSub1b_MUSER_ALUb4  XLXI_2 (.A(A[0]), 
+                                .B(B[0]), 
+                                .C(Ctrl), 
+                                .Ctrl(Ctrl), 
+                                .Co(XLXN_12), 
+                                .S(S[0]));
+   AddSub1b_MUSER_ALUb4  XLXI_4 (.A(A[1]), 
+                                .B(B[1]), 
+                                .C(XLXN_12), 
+                                .Ctrl(Ctrl), 
+                                .Co(XLXN_15), 
+                                .S(S[1]));
+   AddSub1b_MUSER_ALUb4  XLXI_5 (.A(A[2]), 
+                                .B(B[2]), 
+                                .C(XLXN_15), 
+                                .Ctrl(Ctrl), 
+                                .Co(XLXN_17), 
+                                .S(S[2]));
+   AddSub1b_MUSER_ALUb4  XLXI_6 (.A(A[3]), 
+                                .B(B[3]), 
+                                .C(XLXN_17), 
+                                .Ctrl(Ctrl), 
+                                .Co(Co), 
+                                .S(S[3]));
+endmodule
+`timescale 1ns / 1ps
+
+module ALUb4(A, 
+             B, 
+             S, 
+             C, 
+             Co);
+
+    input [3:0] A;
+    input [3:0] B;
+    input [1:0] S;
+   output [3:0] C;
+   output Co;
+   
+   wire XLXN_10;
+   wire [3:0] XLXN_29;
+   wire XLXN_33;
+   wire [3:0] XLXN_42;
+   wire [3:0] XLXN_43;
+   
+   AddSub4b_MUSER_ALUb4  XLXI_1 (.A(A[3:0]), 
+                                .B(B[3:0]), 
+                                .Ctrl(S[0]), 
+                                .Co(XLXN_33), 
+                                .S(XLXN_29[3:0]));
+   MyAND2b4_MUSER_ALUb4  XLXI_2 (.A(A[3:0]), 
+                                .B(B[3:0]), 
+                                .C(XLXN_42[3:0]));
+   MyOR2b4_MUSER_ALUb4  XLXI_3 (.A(A[3:0]), 
+                               .B(B[3:0]), 
+                               .C(XLXN_43[3:0]));
+   Mux4to1b4_MUSER_ALUb4  XLXI_4 (.I0(XLXN_29[3:0]), 
+                                 .I1(XLXN_29[3:0]), 
+                                 .I2(XLXN_42[3:0]), 
+                                 .I3(XLXN_43[3:0]), 
+                                 .s(S[1:0]), 
+                                 .o(C[3:0]));
+   Mux4to1_MUSER_ALUb4  XLXI_5 (.I0(XLXN_33), 
+                               .I1(XLXN_33), 
+                               .I2(XLXN_10), 
+                               .I3(XLXN_10), 
+                               .s(S[1:0]), 
+                               .o(Co));
+   GND  XLXI_6 (.G(XLXN_10));
+endmodule
