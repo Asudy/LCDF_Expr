@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -lib "unisims_ver" -lib "unimacro_ver" -lib "xilinxcorelib_ver" -lib "secureip" -o "D:/Asudy/WorkSpace/LCDF_Expr/Expr8/MyALU/AddSub4b_AddSub4b_sch_tb_isim_beh.exe" -prj "D:/Asudy/WorkSpace/LCDF_Expr/Expr8/MyALU/AddSub4b_AddSub4b_sch_tb_beh.prj" "work.AddSub4b_AddSub4b_sch_tb" "work.glbl" 

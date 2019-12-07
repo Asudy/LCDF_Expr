@@ -1,0 +1,3 @@
+sch2hdl -intstyle ise -family kintex7 -verilog D_74LS138_drc.vf -w E:/Tmp/D_74LS138_SCH/D_74LS138.sch 
+sch2hdl -intstyle ise -family kintex7 -verilog D_74LS138.vf -w E:/Tmp/D_74LS138_SCH/D_74LS138.sch 
+sch2sym -intstyle ise -family kintex7 -refsym D_74LS138 E:/Tmp/D_74LS138_SCH/D_74LS138.sch E:/Tmp/D_74LS138_SCH/D_74LS138.sym 

@@ -1,0 +1,3 @@
+sch2hdl -intstyle ise -family kintex7 -verilog DisplaySync_drc.vf -w E:/Asudy/Expr7/Mux4to1b4_sch/DisplaySync.sch 
+sch2hdl -intstyle ise -family kintex7 -verilog DisplaySync_drc.vf -w E:/Asudy/Expr7/ScoreBoard/DisplaySync.sch 
+sch2hdl -intstyle ise -family kintex7 -verilog DisplaySync.vf -w E:/Asudy/Expr7/ScoreBoard/DisplaySync.sch 

@@ -1,0 +1,9 @@
+[Inputs]
+clk
+rst
+[Outputs]
+=clk_div[31:0]=
+[BiDir]
+[ATTRIBUTES]
+VeriModel clk_div
+

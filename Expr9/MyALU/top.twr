@@ -1,0 +1,91 @@
+--------------------------------------------------------------------------------
+Release 14.7 Trace  (nt64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+
+C:\Xilinx\14.7\ISE_DS\ISE\bin\nt64\unwrapped\trce.exe -intstyle ise -v 3 -s 1
+-n 3 -fastpaths -xml top.twx top.ncd -o top.twr top.pcf -ucf Constraint.ucf
+
+Design file:              top.ncd
+Physical constraint file: top.pcf
+Device,package,speed:     xc7k160t,ffg676,C,-1 (PRODUCTION 1.10 2013-10-13)
+Report level:             verbose report
+
+Environment Variable      Effect 
+--------------------      ------ 
+NONE                      No environment variables were set
+--------------------------------------------------------------------------------
+
+INFO:Timing:2698 - No timing constraints found, doing default enumeration.
+INFO:Timing:3412 - To improve timing, see the Timing Closure User Guide (UG612).
+INFO:Timing:2752 - To get complete path coverage, use the unconstrained paths 
+   option. All paths that are not constrained will be reported in the 
+   unconstrained paths section(s) of the report.
+INFO:Timing:3339 - The clock-to-out numbers in this timing report are based on 
+   a 50 Ohm transmission line loading model.  For the details of this model, 
+   and for more information on accounting for different loading conditions, 
+   please see the device datasheet.
+
+
+
+Data Sheet report:
+-----------------
+All values displayed in nanoseconds (ns)
+
+Clock clk to Pad
+------------+-----------------+------------+-----------------+------------+------------------+--------+
+            |Max (slowest) clk|  Process   |Min (fastest) clk|  Process   |                  | Clock  |
+Destination |  (edge) to PAD  |   Corner   |  (edge) to PAD  |   Corner   |Internal Clock(s) | Phase  |
+------------+-----------------+------------+-----------------+------------+------------------+--------+
+AN<0>       |        12.503(R)|      SLOW  |         4.619(R)|      FAST  |clk_BUFGP         |   0.000|
+AN<1>       |        12.614(R)|      SLOW  |         4.625(R)|      FAST  |clk_BUFGP         |   0.000|
+AN<2>       |        12.473(R)|      SLOW  |         4.702(R)|      FAST  |clk_BUFGP         |   0.000|
+AN<3>       |        12.554(R)|      SLOW  |         4.684(R)|      FAST  |clk_BUFGP         |   0.000|
+SEG<0>      |        15.605(R)|      SLOW  |         5.137(R)|      FAST  |clk_BUFGP         |   0.000|
+SEG<1>      |        15.084(R)|      SLOW  |         5.374(R)|      FAST  |clk_BUFGP         |   0.000|
+SEG<2>      |        15.104(R)|      SLOW  |         5.329(R)|      FAST  |clk_BUFGP         |   0.000|
+SEG<3>      |        15.360(R)|      SLOW  |         4.945(R)|      FAST  |clk_BUFGP         |   0.000|
+SEG<4>      |        14.566(R)|      SLOW  |         5.281(R)|      FAST  |clk_BUFGP         |   0.000|
+SEG<5>      |        14.629(R)|      SLOW  |         5.322(R)|      FAST  |clk_BUFGP         |   0.000|
+SEG<6>      |        14.452(R)|      SLOW  |         5.233(R)|      FAST  |clk_BUFGP         |   0.000|
+------------+-----------------+------------+-----------------+------------+------------------+--------+
+
+Clock to Setup on destination clock clk
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+clk            |    1.405|         |         |         |
+---------------+---------+---------+---------+---------+
+
+Pad to Pad
+---------------+---------------+---------+
+Source Pad     |Destination Pad|  Delay  |
+---------------+---------------+---------+
+FuncSW<0>      |SEG<0>         |   15.448|
+FuncSW<0>      |SEG<1>         |   14.927|
+FuncSW<0>      |SEG<2>         |   14.947|
+FuncSW<0>      |SEG<3>         |   15.053|
+FuncSW<0>      |SEG<4>         |   14.093|
+FuncSW<0>      |SEG<5>         |   14.472|
+FuncSW<0>      |SEG<6>         |   14.194|
+FuncSW<1>      |SEG<0>         |   13.728|
+FuncSW<1>      |SEG<1>         |   12.803|
+FuncSW<1>      |SEG<2>         |   12.823|
+FuncSW<1>      |SEG<3>         |   13.611|
+FuncSW<1>      |SEG<4>         |   12.817|
+FuncSW<1>      |SEG<5>         |   12.752|
+FuncSW<1>      |SEG<6>         |   12.703|
+---------------+---------------+---------+
+
+
+Analysis completed Wed Nov 13 20:53:40 2019 
+--------------------------------------------------------------------------------
+
+Trace Settings:
+-------------------------
+Trace Settings 
+
+Peak Memory Usage: 5100 MB
+
+
+

@@ -1,0 +1,1 @@
+sch2hdl -intstyle ise -family kintex7 -verilog AddSub1b_drc.vf -w D:/Asudy/WorkSpace/LCDF_Expr/Expr8/MyALU/AddSub1b.sch 

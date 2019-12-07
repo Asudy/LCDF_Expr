@@ -1,0 +1,2 @@
+sch2hdl -intstyle ise -family kintex7 -verilog disp_num_drc.vf -w E:/Asudy/Expr7/ScoreBoard/disp_num.sch 
+sch2hdl -intstyle ise -family kintex7 -verilog disp_num.vf -w E:/Asudy/Expr7/ScoreBoard/disp_num.sch 

@@ -1,0 +1,2 @@
+sch2hdl -intstyle ise -family kintex7 -verilog Mux4to1_drc.vf -w D:/Asudy/WorkSpace/LCDF_Expr/Expr7/Mux4to1b4_sch/Mux4to1.sch 
+sch2hdl -intstyle ise -family kintex7 -verilog Mux4to1.vf -w D:/Asudy/WorkSpace/LCDF_Expr/Expr7/Mux4to1b4_sch/Mux4to1.sch 

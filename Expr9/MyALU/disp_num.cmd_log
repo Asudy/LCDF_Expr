@@ -1,0 +1,1 @@
+sch2hdl -intstyle ise -family kintex7 -verilog disp_num.vf -w E:/wjz/Expr8/MyALU/disp_num.sch 

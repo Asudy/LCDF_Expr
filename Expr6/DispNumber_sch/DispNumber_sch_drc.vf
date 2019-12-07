@@ -1,0 +1,78 @@
+////////////////////////////////////////////////////////////////////////////////
+// Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+////////////////////////////////////////////////////////////////////////////////
+//   ____  ____ 
+//  /   /\/   / 
+// /___/  \  /    Vendor: Xilinx 
+// \   \   \/     Version : 14.7
+//  \   \         Application : sch2hdl
+//  /   /         Filename : DispNumber_sch_drc.vf
+// /___/   /\     Timestamp : 10/23/2019 18:48:16
+// \   \  /  \ 
+//  \___\/\___\ 
+//
+//Command: C:\Xilinx\14.7\ISE_DS\ISE\bin\nt64\unwrapped\sch2hdl.exe -intstyle ise -family kintex7 -verilog DispNumber_sch_drc.vf -w E:/tmp/DispNumber_sch/DispNumber_sch.sch
+//Design Name: DispNumber_sch
+//Device: kintex7
+//Purpose:
+//    This verilog netlist is translated from an ECS schematic.It can be 
+//    synthesized and simulated, but it should not be modified. 
+//
+`timescale  100 ps / 10 ps
+
+module INV4_HXILINX_DispNumber_sch (O0, O1, O2, O3, I0, I1, I2, I3);
+    
+
+   output O0;
+   output O1;
+   output O2;
+   output O3;
+
+   input  I0;
+   input  I1;
+   input  I2;
+   input  I3;
+
+assign O0 = !I0;
+assign O1 = !I1;
+assign O2 = !I2;
+assign O3 = !I3;
+
+endmodule
+`timescale 1ns / 1ps
+
+module DispNumber_sch(BTN, 
+                      SW, 
+                      AN, 
+                      SEG);
+
+    input [1:0] BTN;
+    input [7:0] SW;
+   output [3:0] AN;
+   output [7:0] SEG;
+   
+   
+   MyMC14495  XLXI_2 (.DP(BTN[1]), 
+                     .D0(SW[0]), 
+                     .D1(SW[1]), 
+                     .D2(SW[2]), 
+                     .D3(SW[3]), 
+                     .LE(BTN[0]), 
+                     .a(SEG[0]), 
+                     .b(SEG[1]), 
+                     .c(SEG[2]), 
+                     .d(SEG[3]), 
+                     .e(SEG[4]), 
+                     .f(SEG[5]), 
+                     .g(SEG[6]), 
+                     .p(SEG[7]));
+   (* HU_SET = "XLXI_3_0" *) 
+   INV4_HXILINX_DispNumber_sch  XLXI_3 (.I0(SW[4]), 
+                                       .I1(SW[5]), 
+                                       .I2(SW[6]), 
+                                       .I3(SW[7]), 
+                                       .O0(AN[0]), 
+                                       .O1(AN[1]), 
+                                       .O2(AN[2]), 
+                                       .O3(AN[3]));
+endmodule

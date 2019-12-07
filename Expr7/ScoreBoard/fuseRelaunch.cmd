@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -lib "unisims_ver" -lib "unimacro_ver" -lib "xilinxcorelib_ver" -lib "secureip" -o "D:/Asudy/WorkSpace/LCDF_Expr/Expr7/ScoreBoard/clk_div_isim_beh.exe" -prj "D:/Asudy/WorkSpace/LCDF_Expr/Expr7/ScoreBoard/clk_div_beh.prj" "work.clk_div" "work.glbl" 
