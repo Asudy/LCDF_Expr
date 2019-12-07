@@ -1,0 +1,3 @@
+verilog work "CounterRev16b.v"
+verilog work "CounterRev16b_sim.v"
+verilog work "C:/Xilinx/14.7/ISE_DS/ISE//verilog/src/glbl.v"

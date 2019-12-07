@@ -1,0 +1,2 @@
+vhdtdtfi -lib work D:/Asudy/WorkSpace/LCDF_Expr/Expr11/MyCounter/clk_1s.v -lang verilog -prj MyCounter -o clk_1s.spl -module clk_1s -template D:/ProgramFiles/Xilinx/14.7/ISE_DS/ISE//data/splveri.tft -deleteonerror 
+spl2sym -intstyle ise -family kintex7 clk_1s.spl D:/Asudy/WorkSpace/LCDF_Expr/Expr11/MyCounter/clk_1s.sym 

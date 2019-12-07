@@ -1,0 +1,54 @@
+////////////////////////////////////////////////////////////////////////////////
+// Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+////////////////////////////////////////////////////////////////////////////////
+//   ____  ____ 
+//  /   /\/   / 
+// /___/  \  /    Vendor: Xilinx 
+// \   \   \/     Version : 14.7
+//  \   \         Application : sch2hdl
+//  /   /         Filename : CSR_Latch.vf
+// /___/   /\     Timestamp : 11/20/2019 19:12:56
+// \   \  /  \ 
+//  \___\/\___\ 
+//
+//Command: sch2hdl -intstyle ise -family kintex7 -verilog E:/wjz/Expr10/MyLATCHS/CSR_Latch.vf -w E:/wjz/Expr10/MyLATCHS/CSR_Latch.sch
+//Design Name: CSR_Latch
+//Device: kintex7
+//Purpose:
+//    This verilog netlist is translated from an ECS schematic.It can be 
+//    synthesized and simulated, but it should not be modified. 
+//
+`timescale 1ns / 1ps
+
+module CSR_Latch(C, 
+                 R, 
+                 S, 
+                 Q, 
+                 Qbar);
+
+    input C;
+    input R;
+    input S;
+   output Q;
+   output Qbar;
+   
+   wire XLXN_23;
+   wire XLXN_24;
+   wire Q_DUMMY;
+   wire Qbar_DUMMY;
+   
+   assign Q = Q_DUMMY;
+   assign Qbar = Qbar_DUMMY;
+   NAND2  XLXI_1 (.I0(Qbar_DUMMY), 
+                 .I1(XLXN_24), 
+                 .O(Q_DUMMY));
+   NAND2  XLXI_2 (.I0(XLXN_23), 
+                 .I1(Q_DUMMY), 
+                 .O(Qbar_DUMMY));
+   NAND2  XLXI_9 (.I0(C), 
+                 .I1(S), 
+                 .O(XLXN_24));
+   NAND2  XLXI_10 (.I0(R), 
+                  .I1(C), 
+                  .O(XLXN_23));
+endmodule

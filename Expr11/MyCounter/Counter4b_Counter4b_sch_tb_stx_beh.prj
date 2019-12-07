@@ -1,0 +1,3 @@
+verilog isim_temp "Counter4b.vf"
+verilog isim_temp "Counter4b_sim.v"
+verilog isim_temp "D:/ProgramFiles/Xilinx/14.7/ISE_DS/ISE//verilog/src/glbl.v"

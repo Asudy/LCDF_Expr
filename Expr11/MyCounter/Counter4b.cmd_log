@@ -1,0 +1,1 @@
+sch2hdl -intstyle ise -family kintex7 -verilog Counter4b_drc.vf -w E:/wjz/Expr11/MyCounter/Counter4b.sch 

@@ -1,0 +1,28 @@
+Command line:
+   SR_Latch_SR_Latch_sch_tb_isim_beh.exe
+     -simmode  gui
+     -simrunnum  0
+     -socket  62697
+
+Wed Nov 20 20:26:01 2019
+
+
+ Elaboration Time: 0.078125 sec
+
+ Current Memory Usage: 5167.12 Meg
+
+ Total Signals          : 27
+ Total Nets             : 19
+ Total Signal Drivers   : 11
+ Total Blocks           : 5
+ Total Primitive Blocks : 3
+ Total Processes        : 13
+ Total Traceable Variables  : 20
+ Total Scalar Nets and Variables : 101
+
+ Total Simulation Time: 0.078125 sec
+
+ Current Memory Usage: 5481.69 Meg
+
+Wed Nov 20 20:26:34 2019
+

@@ -1,0 +1,70 @@
+////////////////////////////////////////////////////////////////////////////////
+// Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+////////////////////////////////////////////////////////////////////////////////
+//   ____  ____ 
+//  /   /\/   / 
+// /___/  \  /    Vendor: Xilinx 
+// \   \   \/     Version : 14.7
+//  \   \         Application : sch2hdl
+//  /   /         Filename : D_FlipFlop.vf
+// /___/   /\     Timestamp : 11/20/2019 20:26:39
+// \   \  /  \ 
+//  \___\/\___\ 
+//
+//Command: sch2hdl -intstyle ise -family kintex7 -verilog E:/wjz/Expr10/MyLATCHS/D_FlipFlop.vf -w E:/wjz/Expr10/MyLATCHS/D_FlipFlop.sch
+//Design Name: D_FlipFlop
+//Device: kintex7
+//Purpose:
+//    This verilog netlist is translated from an ECS schematic.It can be 
+//    synthesized and simulated, but it should not be modified. 
+//
+`timescale 1ns / 1ps
+
+module D_FlipFlop(C, 
+                  D, 
+                  Q, 
+                  Qbar);
+
+    input C;
+    input D;
+   output Q;
+   output Qbar;
+   
+   wire Qbaro;
+   wire Qo;
+   wire XLXN_21;
+   wire XLXN_29;
+   wire XLXN_30;
+   wire XLXN_66;
+   wire Q_DUMMY;
+   wire Qbar_DUMMY;
+   
+   assign Q = Q_DUMMY;
+   assign Qbar = Qbar_DUMMY;
+   NAND3  XLXI_9 (.I0(Qbaro), 
+                 .I1(XLXN_30), 
+                 .I2(XLXN_66), 
+                 .O(Qo));
+   NAND3  XLXI_10 (.I0(XLXN_29), 
+                  .I1(C), 
+                  .I2(Qo), 
+                  .O(Qbaro));
+   NAND3  XLXI_11 (.I0(XLXN_30), 
+                  .I1(C), 
+                  .I2(Qbaro), 
+                  .O(XLXN_21));
+   NAND3  XLXI_12 (.I0(XLXN_29), 
+                  .I1(D), 
+                  .I2(XLXN_21), 
+                  .O(XLXN_30));
+   NAND3  XLXI_17 (.I0(XLXN_29), 
+                  .I1(XLXN_21), 
+                  .I2(Q_DUMMY), 
+                  .O(Qbar_DUMMY));
+   NAND3  XLXI_18 (.I0(Qbar_DUMMY), 
+                  .I1(Qbaro), 
+                  .I2(XLXN_66), 
+                  .O(Q_DUMMY));
+   VCC  XLXI_30 (.P(XLXN_29));
+   VCC  XLXI_31 (.P(XLXN_66));
+endmodule

@@ -1,0 +1,1 @@
+sch2hdl -intstyle ise -family kintex7 -verilog SR_Latch_drc.vf -w E:/wjz/Expr10/MyLATCHS/SR_Latch.sch 

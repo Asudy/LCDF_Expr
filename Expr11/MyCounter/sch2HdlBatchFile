@@ -1,0 +1,2 @@
+sch2hdl,-intstyle,ise,-family,kintex7,-verilog,E:/wjz/Expr11/MyCounter/DisplaySync.vf,-w,E:/wjz/Expr11/MyCounter/DisplaySync.sch
+sch2hdl,-intstyle,ise,-family,kintex7,-verilog,E:/wjz/Expr11/MyCounter/disp_num.vf,-w,E:/wjz/Expr11/MyCounter/disp_num.sch

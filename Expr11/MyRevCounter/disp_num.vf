@@ -1,0 +1,119 @@
+////////////////////////////////////////////////////////////////////////////////
+// Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+////////////////////////////////////////////////////////////////////////////////
+//   ____  ____ 
+//  /   /\/   / 
+// /___/  \  /    Vendor: Xilinx 
+// \   \   \/     Version : 14.7
+//  \   \         Application : sch2hdl
+//  /   /         Filename : disp_num.vf
+// /___/   /\     Timestamp : 11/27/2019 21:03:42
+// \   \  /  \ 
+//  \___\/\___\ 
+//
+//Command: sch2hdl -intstyle ise -family kintex7 -verilog E:/wjz/Expr11/MyRevCounter/disp_num.vf -w E:/wjz/Expr11/MyRevCounter/disp_num.sch
+//Design Name: disp_num
+//Device: kintex7
+//Purpose:
+//    This verilog netlist is translated from an ECS schematic.It can be 
+//    synthesized and simulated, but it should not be modified. 
+//
+`timescale 1ns / 1ps
+
+module DisplaySync_MUSER_disp_num(Hexs, 
+                                  LES, 
+                                  point, 
+                                  Scan, 
+                                  AN, 
+                                  HEX, 
+                                  LE, 
+                                  p);
+
+    input [15:0] Hexs;
+    input [3:0] LES;
+    input [3:0] point;
+    input [1:0] Scan;
+   output [3:0] AN;
+   output [3:0] HEX;
+   output LE;
+   output p;
+   
+   wire V0;
+   wire V1;
+   
+   VCC  V1kj (.P(V1));
+   Mux4to14b  XLXI_1 (.I0(Hexs[3:0]), 
+                     .I1(Hexs[7:4]), 
+                     .I2(Hexs[11:8]), 
+                     .I3(Hexs[15:12]), 
+                     .s(Scan[1:0]), 
+                     .o(HEX[3:0]));
+   Mux4to14b  XLXI_2 (.I0({V1, V1, V1, V0}), 
+                     .I1({V1, V1, V0, V1}), 
+                     .I2({V1, V0, V1, V1}), 
+                     .I3({V0, V1, V1, V1}), 
+                     .s(Scan[1:0]), 
+                     .o(AN[3:0]));
+   Mux4to1  XLXI_3 (.I0(point[0]), 
+                   .I1(point[1]), 
+                   .I2(point[2]), 
+                   .I3(point[3]), 
+                   .s(Scan[1:0]), 
+                   .o(p));
+   Mux4to1  XLXI_4 (.I0(LES[0]), 
+                   .I1(LES[1]), 
+                   .I2(LES[2]), 
+                   .I3(LES[3]), 
+                   .s(Scan[1:0]), 
+                   .o(LE));
+   GND  XLXI_6 (.G(V0));
+endmodule
+`timescale 1ns / 1ps
+
+module disp_num(clk, 
+                HEXS, 
+                LES, 
+                point, 
+                RST, 
+                AN, 
+                Segment);
+
+    input clk;
+    input [15:0] HEXS;
+    input [3:0] LES;
+    input [3:0] point;
+    input RST;
+   output [3:0] AN;
+   output [7:0] Segment;
+   
+   wire [31:0] clkd;
+   wire [3:0] HEX;
+   wire XLXN_15;
+   wire XLXN_16;
+   
+   clkdiv  XLXI_1 (.clk(clk), 
+                  .rst(RST), 
+                  .clkdiv(clkd[31:0]));
+   DisplaySync_MUSER_disp_num  XLXI_2 (.Hexs(HEXS[15:0]), 
+                                      .LES(LES[3:0]), 
+                                      .point(point[3:0]), 
+                                      .Scan(clkd[18:17]), 
+                                      .AN(AN[3:0]), 
+                                      .HEX(HEX[3:0]), 
+                                      .LE(XLXN_16), 
+                                      .p(XLXN_15));
+   MyMC14495  XLXI_3 (.DP(XLXN_15), 
+                     .D0(HEX[0]), 
+                     .D1(HEX[1]), 
+                     .D2(HEX[2]), 
+                     .D3(HEX[3]), 
+                     .LE(XLXN_16), 
+                     .a(Segment[0]), 
+                     .b(Segment[1]), 
+                     .c(Segment[2]), 
+                     .d(Segment[3]), 
+                     .e(Segment[4]), 
+                     .f(Segment[5]), 
+                     .g(Segment[6]), 
+                     .p(Segment[7]));
+endmodule

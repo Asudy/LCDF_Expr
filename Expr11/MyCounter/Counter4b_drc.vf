@@ -1,0 +1,95 @@
+////////////////////////////////////////////////////////////////////////////////
+// Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+////////////////////////////////////////////////////////////////////////////////
+//   ____  ____ 
+//  /   /\/   / 
+// /___/  \  /    Vendor: Xilinx 
+// \   \   \/     Version : 14.7
+//  \   \         Application : sch2hdl
+//  /   /         Filename : Counter4b_drc.vf
+// /___/   /\     Timestamp : 11/27/2019 19:02:46
+// \   \  /  \ 
+//  \___\/\___\ 
+//
+//Command: C:\Xilinx\14.7\ISE_DS\ISE\bin\nt64\unwrapped\sch2hdl.exe -intstyle ise -family kintex7 -verilog Counter4b_drc.vf -w E:/wjz/Expr11/MyCounter/Counter4b.sch
+//Design Name: Counter4b
+//Device: kintex7
+//Purpose:
+//    This verilog netlist is translated from an ECS schematic.It can be 
+//    synthesized and simulated, but it should not be modified. 
+//
+`timescale 1ns / 1ps
+
+module Counter4b(clk, 
+                 Qa, 
+                 Qb, 
+                 Qc, 
+                 Qd, 
+                 Rc);
+
+    input clk;
+   output Qa;
+   output Qb;
+   output Qc;
+   output Qd;
+   output Rc;
+   
+   wire XLXN_12;
+   wire XLXN_13;
+   wire XLXN_14;
+   wire XLXN_35;
+   wire XLXN_36;
+   wire XLXN_37;
+   wire XLXN_39;
+   wire XLXN_40;
+   wire Qa_DUMMY;
+   wire Qb_DUMMY;
+   wire Qc_DUMMY;
+   wire Qd_DUMMY;
+   
+   assign Qa = Qa_DUMMY;
+   assign Qb = Qb_DUMMY;
+   assign Qc = Qc_DUMMY;
+   assign Qd = Qd_DUMMY;
+   FD #( .INIT(1'b0) ) XLXI_1 (.C(clk), 
+              .D(XLXN_40), 
+              .Q(Qa_DUMMY));
+   FD #( .INIT(1'b0) ) XLXI_2 (.C(clk), 
+              .D(XLXN_14), 
+              .Q(Qb_DUMMY));
+   FD #( .INIT(1'b0) ) XLXI_3 (.C(clk), 
+              .D(XLXN_13), 
+              .Q(Qc_DUMMY));
+   FD #( .INIT(1'b0) ) XLXI_4 (.C(clk), 
+              .D(XLXN_12), 
+              .Q(Qd_DUMMY));
+   XNOR2  XLXI_13 (.I0(XLXN_39), 
+                  .I1(Qa_DUMMY), 
+                  .O(XLXN_14));
+   XNOR2  XLXI_14 (.I0(Qc_DUMMY), 
+                  .I1(XLXN_35), 
+                  .O(XLXN_13));
+   XNOR2  XLXI_15 (.I0(XLXN_37), 
+                  .I1(XLXN_36), 
+                  .O(XLXN_12));
+   INV  XLXI_16 (.I(Qb_DUMMY), 
+                .O(XLXN_39));
+   INV  XLXI_17 (.I(Qc_DUMMY), 
+                .O(Qc_DUMMY));
+   INV  XLXI_19 (.I(Qd_DUMMY), 
+                .O(XLXN_37));
+   INV  XLXI_26 (.I(Qa_DUMMY), 
+                .O(XLXN_40));
+   NOR3  XLXI_27 (.I0(Qc_DUMMY), 
+                 .I1(XLXN_39), 
+                 .I2(XLXN_40), 
+                 .O(XLXN_36));
+   NOR4  XLXI_28 (.I0(XLXN_37), 
+                 .I1(Qc_DUMMY), 
+                 .I2(XLXN_39), 
+                 .I3(XLXN_40), 
+                 .O(Rc));
+   NOR2  XLXI_29 (.I0(XLXN_39), 
+                 .I1(XLXN_40), 
+                 .O(XLXN_35));
+endmodule

@@ -1,0 +1,2 @@
+sch2hdl,-intstyle,ise,-family,kintex7,-verilog,E:/wjz/Expr11/MyRevCounter/disp_num.vf,-w,E:/wjz/Expr11/MyRevCounter/disp_num.sch
+sch2hdl,-intstyle,ise,-family,kintex7,-verilog,E:/wjz/Expr11/MyRevCounter/DisplaySync.vf,-w,E:/wjz/Expr11/MyRevCounter/DisplaySync.sch
