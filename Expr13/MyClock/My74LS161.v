@@ -25,7 +25,7 @@ module My74LS161(
     output reg [3:0] Q
     );
 	 
-	 assign Co = ~|Q;
+    assign Co = (~|Q) & CTT;
 
     always @ (posedge CP or negedge CR) begin
         if ( !CR ) Q = 4'b0;
