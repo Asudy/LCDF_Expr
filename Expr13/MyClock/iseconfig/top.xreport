@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2019-12-11T18:21:47</DateModified>
+  <DateModified>2019-12-11T19:12:03</DateModified>
   <ModuleName>top</ModuleName>
-  <SummaryTimeStamp>Unknown</SummaryTimeStamp>
-  <SavedFilePath>D:/Asudy/WorkSpace/LCDF_Expr/ISEProjects/Expr13/MyClock/iseconfig/top.xreport</SavedFilePath>
-  <ImplementationReportsDirectory>D:/Asudy/WorkSpace/LCDF_Expr/ISEProjects/Expr13/MyClock</ImplementationReportsDirectory>
+  <SummaryTimeStamp>2019-12-11T18:49:16</SummaryTimeStamp>
+  <SavedFilePath>G:/Experiment/Expr13/MyClock/iseconfig/top.xreport</SavedFilePath>
+  <ImplementationReportsDirectory>G:/Experiment/Expr13/MyClock\</ImplementationReportsDirectory>
   <DateInitialized>2019-12-11T18:21:47</DateInitialized>
   <EnableMessageFiltering>false</EnableMessageFiltering>
  </header>
@@ -50,7 +50,7 @@
    <view inputState="Routed" program="xpwr" WrapMessages="true" contextTags="EDK_OFF" hidden="true" type="MessageList" hideColumns="Filtered" file="_xmsgs/xpwr.xmsgs" label="Power Messages" />
    <view inputState="Routed" program="bitgen" WrapMessages="true" contextTags="FPGA_ONLY" type="MessageList" hideColumns="Filtered" file="_xmsgs/bitgen.xmsgs" label="Bitgen Messages" />
    <view inputState="Translated" program="cpldfit" WrapMessages="true" contextTags="CPLD_ONLY,EDK_OFF" hidden="true" type="MessageList" hideColumns="Filtered" file="_xmsgs/cpldfit.xmsgs" label="Fitter Messages" />
-   <view inputState="Current" program="implementation" WrapMessages="true" fileList="_xmsgs/xst.xmsgs,_xmsgs/ngdbuild.xmsgs,_xmsgs/map.xmsgs,_xmsgs/par.xmsgs,_xmsgs/trce.xmsgs,_xmsgs/xpwr.xmsgs,_xmsgs/bitgen.xmsgs" contextTags="FPGA_ONLY" type="MessageList" hideColumns="Filtered" file="_xmsgs/*.xmsgs" label="All Implementation Messages" />
+   <view inputState="Current" program="implementation" WrapMessages="true" fileList="_xmsgs/xst.xmsgs,_xmsgs/ngdbuild.xmsgs,_xmsgs/map.xmsgs,_xmsgs/par.xmsgs,_xmsgs/trce.xmsgs,_xmsgs/xpwr.xmsgs,_xmsgs/bitgen.xmsgs" contextTags="FPGA_ONLY" showInfos="0" type="MessageList" hideColumns="Filtered" file="_xmsgs/*.xmsgs" label="All Implementation Messages" />
    <view inputState="Current" program="fitting" WrapMessages="true" fileList="_xmsgs/xst.xmsgs,_xmsgs/ngdbuild.xmsgs,_xmsgs/cpldfit.xmsgs,_xmsgs/xpwr.xmsgs" contextTags="CPLD_ONLY,EDK_OFF" hidden="true" type="CPLD_MessageList" hideColumns="Filtered" file="_xmsgs/*.xmsgs" label="All Implementation Messages (CPLD)" />
   </viewgroup>
   <viewgroup label="Detailed Reports" >

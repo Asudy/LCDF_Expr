@@ -1,0 +1,8 @@
+INTSTYLE=ise
+INFILE=E:\wjz\Expr13\MyClock\top.ncd
+OUTFILE=E:\wjz\Expr13\MyClock\top.bit
+FAMILY=Kintex7
+PART=xc7k160t-1ffg676
+WORKINGDIR=E:\wjz\Expr13\MyClock
+LICENSE=WebPack
+USER_INFO=__0_0_0

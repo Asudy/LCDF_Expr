@@ -41,7 +41,7 @@ module top(
 	assign RSTm0 = num[3] & num[0];
 	assign RSTm1 = num[6] & num[4] & RSTm0;
 	assign RSTh0 = num[11] & num[8] & RSTm1;
-	assign RSTh1 = num[13] & RSTh0;
+	assign RSTh1 = num[13] & num[9] & num[8] & RSTm0;
 
 	My74LS161	m0(	.CR(1'b1), .CTP(1'b1), .CTT(1'b1),
 					.CP(clk_100ms), 
@@ -57,7 +57,7 @@ module top(
 				h0(	.CR(1'b1), .CTP(1'b1), 
 					.CTT( RSTm1 ),
 					.CP(clk_100ms), 
-					.LD( ~RSTh0 ),
+					.LD( ~(RSTh0 | RSTh1) ),
 					.D(4'b0),
 					.Q(num[11:8]) ),
 				h1(	.CR(1'b1), .CTP(1'b1), 

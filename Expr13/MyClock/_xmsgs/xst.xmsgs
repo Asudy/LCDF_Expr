@@ -5,16 +5,61 @@
      behavior or data corruption.  It is strongly advised that
      users do not edit the contents of this file. -->
 <messages>
-<msg type="warning" file="HDLCompiler" num="1016" delta="old" >"D:\Asudy\WorkSpace\LCDF_Expr\ISEProjects\Expr13\MyClock\top.v" Line 46: Port <arg fmt="%s" index="1">Co</arg> is not connected to this instance
+<msg type="warning" file="HDLCompiler" num="1016" delta="old" >"E:\wjz\Expr13\MyClock\top.v" Line 46: Port <arg fmt="%s" index="1">Co</arg> is not connected to this instance
 </msg>
 
-<msg type="warning" file="HDLCompiler" num="462" delta="old" >"D:\Asudy\WorkSpace\LCDF_Expr\ISEProjects\Expr13\MyClock\My74LS161.v" Line 32: if-condition does not match any sensitivity list edge
+<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">E:\wjz\Expr13\MyClock\top.v</arg>&quot; line <arg fmt="%s" index="2">46</arg>: Output port &lt;<arg fmt="%s" index="3">Co</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">m0</arg>&gt; is unconnected or connected to loadless signal.
 </msg>
 
-<msg type="error" file="HDLCompiler" num="1128" delta="old" >"D:\Asudy\WorkSpace\LCDF_Expr\ISEProjects\Expr13\MyClock\My74LS161.v" Line 33: Assignment under multiple single edges is not supported for synthesis
+<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">E:\wjz\Expr13\MyClock\top.v</arg>&quot; line <arg fmt="%s" index="2">51</arg>: Output port &lt;<arg fmt="%s" index="3">Co</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">m1</arg>&gt; is unconnected or connected to loadless signal.
 </msg>
 
-<msg type="warning" file="HDLCompiler" num="1499" delta="old" >"D:\Asudy\WorkSpace\LCDF_Expr\ISEProjects\Expr13\MyClock\My74LS161.v" Line 21: Empty module &lt;<arg fmt="%s" index="1">My74LS161</arg>&gt; remains a black box.
+<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">E:\wjz\Expr13\MyClock\top.v</arg>&quot; line <arg fmt="%s" index="2">57</arg>: Output port &lt;<arg fmt="%s" index="3">Co</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">h0</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">E:\wjz\Expr13\MyClock\top.v</arg>&quot; line <arg fmt="%s" index="2">63</arg>: Output port &lt;<arg fmt="%s" index="3">Co</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">h1</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">d1/XLXI_1/clk_div_19</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">d1/XLXI_1/clk_div_20</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">d1/XLXI_1/clk_div_21</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">d1/XLXI_1/clk_div_22</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">d1/XLXI_1/clk_div_23</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">d1/XLXI_1/clk_div_24</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">d1/XLXI_1/clk_div_25</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">d1/XLXI_1/clk_div_26</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">d1/XLXI_1/clk_div_27</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">d1/XLXI_1/clk_div_28</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">d1/XLXI_1/clk_div_29</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">d1/XLXI_1/clk_div_30</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">d1/XLXI_1/clk_div_31</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="info" file="Xst" num="2169" delta="old" >HDL ADVISOR - Some clock signals were not automatically buffered by XST with BUFG/BUFR resources. Please use the buffer_type constraint in order to insert these buffers to the clock signals to help prevent skew problems.
 </msg>
 
 </messages>

@@ -21,16 +21,16 @@
 module My74LS161(
     input wire CR, LD, CTP, CTT, CP,
     input wire [3:0] D,
-    output reg Co,
+    output wire Co,
     output reg [3:0] Q
     );
+	 
+	 assign Co = ~|Q;
 
     always @ (posedge CP or negedge CR) begin
         if ( !CR ) Q = 4'b0;
         else if ( !LD ) Q = D;
         else if ( CTP && CTT ) Q = Q + 4'b1;
-        if ( Q == 4'b1111 ) Co = 1;
-        else Co = 0;
     end
 
 endmodule
