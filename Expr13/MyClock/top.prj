@@ -1,0 +1,8 @@
+verilog work "MyMC14495.vf"
+verilog work "Mux4to1b4.vf"
+verilog work "Mux4to1.vf"
+verilog work "clk_div.v"
+verilog work "My74LS161.v"
+verilog work "disp_num.vf"
+verilog work "clk_100ms.v"
+verilog work "top.v"

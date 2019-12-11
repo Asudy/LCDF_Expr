@@ -1,0 +1,81 @@
+////////////////////////////////////////////////////////////////////////////////
+// Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+////////////////////////////////////////////////////////////////////////////////
+//   ____  ____ 
+//  /   /\/   / 
+// /___/  \  /    Vendor: Xilinx 
+// \   \   \/     Version : 14.7
+//  \   \         Application : sch2hdl
+//  /   /         Filename : Mux4to1.vf
+// /___/   /\     Timestamp : 10/30/2019 18:11:28
+// \   \  /  \ 
+//  \___\/\___\ 
+//
+//Command: D:\ProgramFiles\Xilinx\14.7\ISE_DS\ISE\bin\nt64\unwrapped\sch2hdl.exe -intstyle ise -family kintex7 -verilog Mux4to1.vf -w D:/Asudy/WorkSpace/LCDF_Expr/Expr7/Mux4to1b4_sch/Mux4to1.sch
+//Design Name: Mux4to1
+//Device: kintex7
+//Purpose:
+//    This verilog netlist is translated from an ECS schematic.It can be 
+//    synthesized and simulated, but it should not be modified. 
+//
+`timescale 1ns / 1ps
+
+module Mux4to1(I0, 
+               I1, 
+               I2, 
+               I3, 
+               s, 
+               o);
+
+    input I0;
+    input I1;
+    input I2;
+    input I3;
+    input [1:0] s;
+   output o;
+   
+   wire NS0;
+   wire NS1;
+   wire S0;
+   wire S1;
+   wire S2;
+   wire S3;
+   wire XLXN_66;
+   wire XLXN_67;
+   wire XLXN_68;
+   wire XLXN_69;
+   
+   INV  XLXI_1 (.I(s[0]), 
+               .O(NS0));
+   INV  XLXI_2 (.I(s[1]), 
+               .O(NS1));
+   AND2  XLXI_7 (.I0(NS0), 
+                .I1(NS1), 
+                .O(S0));
+   AND2  XLXI_8 (.I0(s[0]), 
+                .I1(NS1), 
+                .O(S1));
+   AND2  XLXI_9 (.I0(NS0), 
+                .I1(s[1]), 
+                .O(S2));
+   AND2  XLXI_10 (.I0(s[1]), 
+                 .I1(s[0]), 
+                 .O(S3));
+   AND2  XLXI_29 (.I0(I3), 
+                 .I1(S3), 
+                 .O(XLXN_69));
+   AND2  XLXI_30 (.I0(I1), 
+                 .I1(S1), 
+                 .O(XLXN_67));
+   AND2  XLXI_31 (.I0(I2), 
+                 .I1(S2), 
+                 .O(XLXN_68));
+   AND2  XLXI_32 (.I0(I0), 
+                 .I1(S0), 
+                 .O(XLXN_66));
+   OR4  XLXI_47 (.I0(XLXN_69), 
+                .I1(XLXN_68), 
+                .I2(XLXN_67), 
+                .I3(XLXN_66), 
+                .O(o));
+endmodule

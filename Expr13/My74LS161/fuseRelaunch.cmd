@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -lib "unisims_ver" -lib "unimacro_ver" -lib "xilinxcorelib_ver" -lib "secureip" -o "D:/Asudy/WorkSpace/LCDF_Expr/ISEProjects/Expr13/My74LS161/My74LS161_sim_isim_beh.exe" -prj "D:/Asudy/WorkSpace/LCDF_Expr/ISEProjects/Expr13/My74LS161/My74LS161_sim_beh.prj" "work.My74LS161_sim" "work.glbl" 
