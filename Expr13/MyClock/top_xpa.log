@@ -1,0 +1,32 @@
+Creating log file G:\Experiment\Expr13\MyClock\top_xpa.log.
+Loading device for application Rf_Device from file '7k160t.nph' in environment
+C:\Xilinx\14.7\ISE_DS\ISE\.
+   "top" is an NCD, version 3.2, device xc7k160t, package ffg676, speed -1
+
+INFO:Power:1693 - 
+   --------------------------------------------------------------
+                         The power estimate will be calculated using PRODUCTION
+   data.
+   --------------------------------------------------------------
+
+Design load 20% completeDesign load 25% completeDesign load 30% completeDesign load 60% completeDesign load 95% completeDesign load 100% completeRunning Vector-less Activity Propagation
+......
+Finished Running Vector-less Activity Propagation
+Finished Running Vector-less Activity Propagation 0 secs 
+WARNING:Power:1337 - Clock frequency for clock net "c1/clk_100ms" is zero.
+WARNING:Power:1337 - Clock frequency for clock net "clk_BUFGP" is zero.
+WARNING:Power:1337 - Clock frequency for clock net "clk_BUFGP/IBUFG" is zero.
+WARNING:Power:1369 - Clock frequency for one or more clocks was not found through
+   timing constraints (PCF file) or simulation data.  Without knowing the
+   clock frequency of all clocks, dynamic power information for those clock
+   domains will default to zero which may under-estimate the power for this
+   design.  To avoid this warning, provide at least one of the following:
+     1. The proper timing constraints (PERIOD) for clocks (re-implement design
+        and load the newly generated PCF file into XPower Analyzer)
+     2. A post PAR simulation-generated VCD or SAIF file indicating clock
+        frequencies
+     3. The clock frequency for clocks in the "By Type -> Clocks" view in the
+        XPower Analyzer GUI and then applying "Update Power Analysis"
+
+Design 'top.ncd' and constraints 'top.pcf' opened successfully
+

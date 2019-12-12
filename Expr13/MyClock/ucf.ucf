@@ -1,0 +1,36 @@
+NET "clk" LOC = AC18 | IOSTANDARD = LVCMOS18;
+
+#net "btn[0]" loc = AA10 | IOSTANDARD = LVCMOS15;
+#net "btn[0]" clock_dedicated_route = false;
+#net "btn[1]" loc = AB10 | IOSTANDARD = LVCMOS15;
+#net "btn[1]" clock_dedicated_route = false;
+#net "btn[2]" loc = AA13 | IOSTANDARD = LVCMOS15;
+#net "btn[2]" clock_dedicated_route = false;
+#net "btn[3]" loc = AA12 | IOSTANDARD = LVCMOS15;
+#net "btn[3]" clock_dedicated_route = false;
+
+#net "SW[4]" loc = AE10 | IOSTANDARD = LVCMOS15;
+#net "SW[5]" loc = AE12 | IOSTANDARD = LVCMOS15;
+#net "SW[6]" loc = AF12 | IOSTANDARD = LVCMOS15;
+#net "SW[7]" loc = AE8 | IOSTANDARD = LVCMOS15; #LES
+#net "SW[3]" loc = AF10 | IOSTANDARD = LVCMOS15;
+#net "SW[2]" loc = AF13 | IOSTANDARD = LVCMOS15;
+#net "SW[1]" loc = AE13 | IOSTANDARD = LVCMOS15;
+#net "SW[0]" loc = AF8 | IOSTANDARD = LVCMOS15; #point
+
+#NET "SW" LOC = AF10 | IOSTANDARD = LVCMOS15;
+#NET "Rc" LOC = W23 | IOSTANDARD = LVCMOS33;
+
+NET "SEG[0]" LOC = AB22 | IOSTANDARD = LVCMOS33;
+NET "SEG[1]" LOC = AD24 | IOSTANDARD = LVCMOS33;
+NET "SEG[2]" LOC = AD23 | IOSTANDARD = LVCMOS33;
+NET "SEG[3]" LOC = Y21 | IOSTANDARD = LVCMOS33;
+NET "SEG[4]" LOC = W20 | IOSTANDARD = LVCMOS33;
+NET "SEG[5]" LOC = AC24 | IOSTANDARD = LVCMOS33;
+NET "SEG[6]" LOC = AC23 | IOSTANDARD = LVCMOS33;
+NET "SEG[7]" LOC = AA22 | IOSTANDARD = LVCMOS33;
+
+NET "AN[0]" LOC = AD21 | IOSTANDARD = LVCMOS33;
+NET "AN[1]" LOC = AC21 | IOSTANDARD = LVCMOS33;
+NET "AN[2]" LOC = AB21 | IOSTANDARD = LVCMOS33;
+NET "AN[3]" LOC = AC22 | IOSTANDARD = LVCMOS33;
