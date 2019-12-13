@@ -168,6 +168,7 @@
     <transform xil_pn:end_ts="1574088487" xil_pn:in_ck="1201910126830518599" xil_pn:name="TRAN_ISimulateBehavioralModelRunFuse" xil_pn:prop_ck="1885203218932399694" xil_pn:start_ts="1574088485">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForProperties"/>
       <status xil_pn:value="OutOfDateForOutputs"/>
       <status xil_pn:value="OutputChanged"/>
       <outfile xil_pn:name="AddSub4b_AddSub4b_sch_tb_beh.prj"/>
@@ -180,6 +181,8 @@
     <transform xil_pn:end_ts="1574088488" xil_pn:in_ck="4137021280646513730" xil_pn:name="TRAN_ISimulateBehavioralModel" xil_pn:prop_ck="7036797527041894449" xil_pn:start_ts="1574088487">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForProperties"/>
+      <status xil_pn:value="OutOfDateForPredecessor"/>
       <status xil_pn:value="OutOfDateForOutputs"/>
       <status xil_pn:value="OutputChanged"/>
       <outfile xil_pn:name="AddSub4b_AddSub4b_sch_tb_isim_beh.wdb"/>

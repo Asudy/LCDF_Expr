@@ -1,0 +1,412 @@
+<center>
+    <h1>Logic and Computer Design Fundamentals</h1>
+    <h2>Experiment 8-11 Lab Report</h2>
+</center>
+
+<table align="center">
+    <tr>
+        <th align="center">Name:</th>
+        <td>王浚哲</td>
+        <th align="center">ID:</th>
+        <td>3180103011</td>
+        <th align="center">Major:</th>
+        <td>Computer Science & Technology</td>
+    </tr>
+    <tr>
+        <th align="center">Course:</th>
+        <td colspan="3">Logic & Computer Design Fundamentals</td>
+        <th align="center">Groupmate:</th>
+        <td>朱雨轩</td>
+    </tr>
+    <tr>
+        <td align="center"> <b>Date:</b> </td>
+        <td> 2019-11-13/20/27</td>
+        <td align="center"> <b>Place:</b> </td>
+        <td> East 4-509 </td>
+        <td align="center"> <b>Instructor:</b> </td>
+        <td> 洪奇军</td>
+    </tr>
+</table>
+
+## Table of Contents
+
+[TOC]
+
+## Expr8-9. Principle & Design of Adder, Adder-Subtractor and Arithmetic and Logic Unit (ALU)
+
+### §1 Purposes & Requirements
+
+1. Master the principle and logic function of 1-bit full adder.
+2. Master the principle and carry delay of the ripple carry adder.
+3. Master the principle and logic function of subtractor.
+4. Master the design of adder-subtractors.
+5. Master the principle of ALU and it’s function in the CPU.
+6. Master the design of ALU.
+
+### §2 Principle & Tasks
+
+#### 2.1 Experiment Tasks
+
+1. Design *4-bit Adder-Subtractor* using schematic diagram.
+2. Implement *4-bit ALU Module* and it's application.
+
+#### 2.2 Experiment Principle
+
+##### 2.2.1 1-bit Full Adder
+
+An 1-bit full adder implements the function of addition (with carry operand considered). And it has:
+
+- 3 **inputs:** Data bit $A_i$ and $B_i$, and carry input $C_i$.
+
+- 2 **outputs:** Current bit sum $S_i$ and the carry output $C_{i+1}$.
+
+The truth table of a 1-bit full adder is as follows:
+
+| $A_i$ | $B_i$ | $C_i$ | $S_i$ | $C_{i+1}$ |
+| :---: | :--: | :--: | :--: | :--: |
+| 0 | 0 | 0 | 0 | 0 |
+| 0 | 0 | 1 | 1 | 0 |
+| 0 | 1 | 0 | 1 | 0 |
+| 0 | 1 | 1 | 0 | 1 |
+| 1 | 0 | 0 | 1 | 0 |
+| 1 | 0 | 1 | 0 | 1 |
+| 1 | 1 | 0 | 0 | 1 |
+| 1 | 1 | 1 | 1 | 1 |
+
+From the truth table we can obtain the logic functions of $S_i$ and $C_{i+1}$:
+
+$$
+S_i = A_i \otimes B_i \otimes C_i	\\
+C_{i+1} = A_iB_i + B_iC_i + C_iA_i
+$$
+And these functions enable us to design the 1-bit full adder module schematically in the later section.
+
+##### 2.2.2 n-bit Ripple-Carry Full Adder
+
+- N-bit full adder can be constructed by concatenating several 1-bit full adders.
+
+- Since the carry is propagated bit-by-bit, results of more significant bits are produced slowly. And the delay is longer when the number of bits is bigger.
+
+An intuitional diagram of a *n-bit Ripple-Carry Adder*:
+
+<img src="ISEProjects/Expr9/RippleCarryAdder.png" alt="RippleCarryAdder" style="zoom:48%;" />
+
+We'll design our 4-bit full adder *Adder4b* according to this diagram, which will be shown in the later section.
+
+##### 2.2.3 1-bit Full Adder-Subtractor
+
+As we know, the target of a **subtractor** is to implement the function of *subtraction* — i.e. addition between a positive number and a negative one. 
+
+To convert a positive number (subtrahend) to its *opposite number* for subtraction, we need to obtain its **2's complement** with some functional circuit which can:
+
+1. **Invert** the subtrahend *bit-by-bit* to obtain its **1's complement**.
+2. **Add 1** to the obtained number.
+
+With the characteristic of XOR2 Gates which lets the XOR2 Gate to **invert** one input with 1 applied to the other input and **maintain** one input with 0 applied, we can use a *control signal* to decide whether to **"invert"** an input bit (subtrahend, for example). And based on a 1-bit Full Adder, when we also connect the *control signal* to the *Carry Input*, it **adds 1** to the result, which can be seen as adding 1 to the subtrahend as well, thus implements the operation of obtaining **2's complement of the subtrahend**. 
+
+An intuitional diagram of Full Adder-Subtractor will be shown in the next section.
+
+##### 2.2.4 n-bit Ripple-Carry Full Adder-Subtractor
+
+- Using 2's complement addition, the subtrahend is regarded as its opposite number and converted to 2's complement. (Principle stated in 2.2.3.)
+
+- The Adder-Subtractor shares the design of n-bit Ripple-Carry Full Adder.
+
+- It uses XOR Gates with a *control signal* connected to do the invert action, and the least significant bit's carry $C_0$ is also connected to the *control signal*.
+- When the *control signal Ctr* is 0, it runs on the **Adder Mode**. And when *Ctr* is 1, it runs on the **Subtractor Mode**, which can be simply switched by changing a switch.
+
+A diagram of the n-bit Ripple-Carry Full Adder-Subtractor is as the following:
+
+<img src="ISEProjects/Expr9/AddSubnb.png" alt="AddSubnb" style="zoom:48%;" />
+
+We'll design our 4-bit full adder-subtractor *AddSub4b* according to this diagram, which will be shown in the later section.
+
+##### 2.2.5 4-bit Arithmetic and Logic Unit (ALU)
+
+An Arithmetic and Logic Unit, so-called an ALU, is an essential and very important component in a Central Processing Unit (CPU). An ALU is supposed to be capable of:
+
+1. **Arithmetic Operations:** Calculate addition & subtraction between 2 input numbers and output the result.
+2. **Logic Operations:** Conduct AND & OR operations of 2 input data and give the result.
+
+It's easy to infer that some **Multiplexers** must be used to **select** the output data source. Our ALU in this experiment looks like:
+
+<img src="ISEProjects/Expr9/ALUeg.png" alt="ALUeg" style="zoom:76%;" />
+
+Since the implementation of modules *myAnd2b4* and *myOr2b4* is not given, it's also our task to design those modules.
+
+##### 2.2.6 Some auxiliary modules
+
+There're several auxiliary modules needed for implementing our target function correctly and user-friendly. They will be introduced and discussed in §4.
+
+### §3 Main Instruments & Materials
+
+#### 3.1 Experiment Instruments
+
+1. A Computer with ISE 14.7 Installed
+2. SWORD Board
+
+#### 3.2 Experiment Materials
+
+None.
+
+### §4 Experiment Procedure & Operations
+
+#### 4.1 Design *4-bit Adder-Subtractor* using schematic diagram
+
+1. Create a new ISE project named "*MyALU*" with Top Level Source Type *HDL*.
+
+   **Note:** Both 2 tasks will be done in this same project.
+
+2. Create a new Schematic source file named "*AddSub1b*".
+
+3. Design *AddSub1b* module by drawing schematic diagram (as the figure below which is drawn by me myself). Then create schematic symbol of *AddSub1b* for later use.
+
+   <img src="ISEProjects/Expr9/AddSub1b.png" alt="AddSub1b" style="zoom:75%;" />
+
+4. Create a new Schematic source file named "*AddSub4b*".
+
+5. Design *AddSub4b* module by drawing schematic diagram, invoking the previously designed *AddSub1b* (as the figure below which is drawn by me myself).
+
+   <img src="ISEProjects/Expr9/AddSub4b.png" alt="AddSub4b" style="zoom:75%;" />
+
+6. Use "Check Design Rules" to check if there's any design error.
+
+7. (Selective) Run "View HDL Functional Model" to generate and see the Verilog HDL code of the design.
+
+8. Run simulation on *AddSub4b* Module. Excitation code is as the following:
+
+   **Note:** The excitation code should cover all 4 operations (as commented in the code fence below) to check if the design is normally functioning.
+
+   ```verilog
+   `timescale 1ns / 1ps
+   module AddSub4b_AddSub4b_sch_tb();
+   
+   // Inputs
+      reg Ctrl;
+      reg [3:0] A;
+      reg [3:0] B;
+       
+   // Output
+      wire [3:0] S;
+      wire Co;
+       
+   // Instantiate the UUT (Unit Under Test)
+      AddSub4b UUT (
+   		.S(S), 
+   		.Ctrl(Ctrl), 
+   		.A(A), 
+   		.B(B), 
+   		.Co(Co)
+      );
+   // Initialize Inputs
+   	initial begin
+   		Ctrl = 0;
+   		A = 0;
+   		B = 0;
+   		
+   		// TestCase1: Addition, with no carry generated
+   		A = 2;
+   		B = 4;
+   		#100;
+   		// TestCase2: Addition, with carry generated
+   		A = 9;
+   		B = 14;
+   		#100;
+   		// TestCase3: Subtraction, with carry generated (No borrow)
+   		Ctrl = 1;
+   		A = 12;
+   		B = 9;
+   		#100;
+   		// TestCase4: Subtraction, with no carry generated (Borrow)
+   		A = 9;
+   		B = 12;
+   		#100;
+   	end	
+   endmodule
+   ```
+
+9. Create Schematic Symbol of *AddSub4b* for later use.
+
+#### 4.2 Implement *4-bit ALU Module*
+
+2. Create new Schematic source file named "*ALUb4*".
+2. To implement our ALU, we need modules *MyAND2b4* and *MyOR2b4*. So create new schematic source files and implement them by drawing the diagram. (as the following) Then create schematic symbols for our ALU.
+
+<center>
+   <img src="ISEProjects/Expr9/MyAND2b4.png" alt="MyAND2b4" style="zoom: 50%;" /> <img src="ISEProjects/Expr9/MyOR2b4.png" alt="MyOR2b4" style="zoom: 50%;" />
+</center>
+
+3. Use "Add Copy Of Source" to add symbol and schematic files of "*Mux4to1b4*" and "*Mux4to1*" which were implemented in Lab Experiment 7.
+
+   **Note:** The ".sym" file only allows you to use the corresponding **symbol** in the schematic files of the current project, while the ".vf" or the ".sch" file is the one which **defines the function** of it. (So you only need either ".vf" or ".sch" along with the ".sym" file to make a user-designed component work.)
+
+4. Make sure symbol "*AddSub4b*", "*Mux4to1b4*", "*Mux4to1*", "*MyAND2b4*" and "*MyOR2b4*" can be found in the "*symbol*" list (should be first ones).
+
+5. We can finally design our ALU Module as the diagram shown below:
+
+   <img src="ISEProjects/Expr9/ALUb4.png" alt="ALUb4" style="zoom:75%;" />
+
+6. Use "Check Design Rules" to check if there's any design error.
+
+7. Run simulation on *MyALU* Module. Excitation code is as the following:
+
+   **Note:** The excitation code should cover all 4 operations (as commented in the code fence below) to check if the design is normally functioning.
+
+   ```verilog
+   `timescale 1ns / 1ps
+   
+   module ALUb4_ALUb4_sch_tb();
+   // Inputs
+      	reg [3:0] A;
+      	reg [3:0] B;
+      	reg [1:0] S;
+   
+   // Output
+      	wire Co;
+      	wire [3:0] C;
+       
+   // Instantiate the UUT
+      	ALUb4 UUT (
+   		.A(A), 
+   		.B(B), 
+   		.S(S), 
+   		.Co(Co), 
+   		.C(C)
+      	);
+   // Initialize Inputs
+   	integer i;
+   	initial begin
+   		A = 0;
+   		B = 0;
+   		S = 0;
+   		
+   		A = 4'b1010;	B = 4'b0111;
+   		#100;
+   		B = 4'b0011;
+           for ( i=0; i<4; i=i+1 ) begin	// Test all 4 cases
+   			S = i;
+   			#100;
+   		end
+   	end
+   endmodule
+   ```
+
+8. Upload the design to the SWORD Board and verify the function of D_74LS138 Module. The **User Constraint File** (UCF) is as the following:
+
+9. The correspondence of the I/O and  the Pins can be seen in **"Pinout Report"** in **"Design Summary"**.
+
+10. Operate on the SWORD Board according to the truth table to verify whether the module implemented the target function.
+
+#### 4.3 Sum all things up and make them Operable
+
+1. Create new Verilog Module source file "*Top.v*".
+
+2. Right-click the module *Top* and **Set it as Top Module**.
+
+3. Add copy of source "*clkdiv.v*", "*disp_num.v*" and "*CreateNumber.v*".
+
+4. Modify the `CreateNumber` Module so that we can not only use buttons to increase a digit, **but also decrease** it using a single button.
+
+   The original `CreateNumber` Module was like:
+
+   ```verilog
+   module CreateNumber(
+   	input wire [3:0] btn,
+   	output reg [15:0] num
+   	);
+   	wire [3:0] A,B,C,D;
+   	
+   	initial num <= 16'b1010_1011_1100_1101;
+   	
+   	assign A = num[3:0]   + 4'd1;
+   	assign B = num[7:4]   + 4'd1;
+   	assign C = num[11:8]  + 4'd1;
+   	assign D = num[15:12] + 4'd1;
+   	
+   	always @ (posedge btn[0]) num[3:0]   <= A;
+   	always @ (posedge btn[1]) num[7:4]   <= B;
+   	always @ (posedge btn[2]) num[11:8]  <= C;
+   	always @ (posedge btn[3]) num[15:12] <= D;
+   
+   endmodule
+   ```
+
+   We can see that its 9-12 rows were the statements that implemented the "increase by 1" function. To obtain our target function as stated above, we need to modify those rows with our *AddSub4b* Module, and of course, add 4 switches `wire [3:0] sw` to determine on which mode should the `CreateNumber` module operate:
+
+   ```verilog
+   module CreateNumber(
+   	...
+       input wire [3:0] sw,
+       ...);
+       
+   	AddSub4b a1(.A(num[ 3: 0]), .B(4'b1), .Ctrl(sw[0]), .S(A));
+   	AddSub4b a2(.A(num[ 7: 4]), .B(4'b1), .Ctrl(sw[1]), .S(B));
+   	AddSub4b a3(.A(num[11: 8]), .B(4'b1), .Ctrl(sw[2]), .S(C));
+   	AddSub4b a4(.A(num[15:12]), .B(4'b1), .Ctrl(sw[3]), .S(D));
+       
+   endmodule
+   ```
+
+5. Create a new Module `pbdebounce` for a *Button Anti-jitter* (VERY IMPORTANT!)
+
+   1. The **reason** for an anti-jitter: When a button is pressed down or bounce up, there'd be a **mechanical vibration**. And the period of the vibration is usually between 10~20ms.
+   2. The **principle** of an anti-jitter: DELAY to judge the status of buttons to get rid of those mechanical vibrations.
+
+   A anti-jitter can be implemented by the following code block:
+
+   ```verilog
+   module pbdeBounce(
+       input wire clk_1ms,
+       input wire button,
+       output reg pbreg
+       );
+   
+       reg [7:0] pbshift;
+   
+       always @ (posedge clk_1ms) begin
+           pbshift = pbshift << 1;
+           pbshift[0] = button;
+           if ( pbshift == 8'b0 ) pbreg = 0;
+           if ( pbshift == 8'hFF ) pbreg = 1;
+       end
+   
+   endmodule
+   ```
+
+   Since the input clock period is 1ms, the code above means that one needs to be continuously pressing a button for at least **8ms** to trigger a button. This module is really helpful because we want to decide when a digit should be increased *by ourselves* rather than *by the mechanical vibration*.
+
+6. 
+
+### §5 Results & Analysis
+
+#### 5.1 Design 74LS138 decoder module using schematic diagram
+
+1. "Check Design Rules" didn't return any errors.
+
+2. Simulation result was as the following:
+
+   <img src="Expr5/74LS138_Sim.PNG" alt="74LS138_Sim" style="zoom:75%;" />
+
+**Analysis:** From the simulation, we can see that the *D_74LS138 Module* implemented the target function.
+
+#### 5.2 Verify D_74LS138 Module
+
+1. After modifying user constraint file, the correspondence of the I/O and the Pins (Pinout Report) is as shown in the following figure.
+
+   ![ModuleTest_Pins](Expr5/ModuleTest_Pins.png)
+
+2. After operating on the SWORD Board, it was clear that the *D_74LS138 Module* worked correctly on the board.
+
+**Analysis:** The *D_74LS138 Module* passed the physical verification.
+
+#### 5.3 Implement *Lamp Control Function* using 74LS138 decoder
+
+1. Simulation result was as the following:
+
+   ![LampCtrl_Sim](Expr5/LampCtrl_Sim.PNG)
+
+2. After operating on the SWORD Board, it was clear that the *LampCtrl138 Module* worked correctly on the board. All input combinations and outputs satisfied the truth table.
+
+   <img src="Expr5/Result.png" alt="Result" style="zoom:50%;" />
+
+**Analysis:** So far, the target function of this experiment is correctly implemented by combining needed minterms from a 3-to-8 line decoder *"D_74LS138"*. The experiment was successful.
