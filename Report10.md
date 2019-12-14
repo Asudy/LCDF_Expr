@@ -28,72 +28,42 @@
     </tr>
 </table>
 
-## Table of Contents
+# Expr10. Principle and Design of Latches and Flip-Flops
 
-[TOC]
+## §1 Purposes & Requirements
 
-## Expr8-9. Principle & Design of Adder, Adder-Subtractor and Arithmetic and Logic Unit (ALU)
+1. Master the formation condition and the principle of several kinds of **Latches** and **Flip-Flops**.
+2. Master the difference between Latches and Flip-Flops.
+3. Master the basic functions of *Basic SR Latch*, *Gated SR Latch*, *D latch*, *SR Master-Slave Flip-Flop* and *D Flip-Flop*.
+4. Explore the existing timing problem of *Basic SR Latch*, *Gated SR Latch*, *D Latch,* *SR Master-Slave Flip-Flop* and *D Flip-Flop*.
 
-### §1 Purposes & Requirements
+## §2 Principle & Tasks
 
-1. Master the principle and logic function of 1-bit full adder.
-2. Master the principle and carry delay of the ripple carry adder.
-3. Master the principle and logic function of subtractor.
-4. Master the design of adder-subtractors.
-5. Master the principle of ALU and it’s function in the CPU.
-6. Master the design of ALU.
+### 2.1 Experiment Tasks
 
-### §2 Principle & Tasks
+1. Implement *Basic SR Latch*, verify its function and understand its timing problems.
+2. Implement *Gated SR Latch*, verify its function and understand its timing problems.
+3. Implement *D Latch*, verify its function and understand its timing problems.
+4. Implement *SR Master-Slave Flip-Flop*, verify its function and understand its timing problems.
+5. Implement *D Flip-Flip* and verify its function.
 
-#### 2.1 Experiment Tasks
+### 2.2 Experiment Principle
 
-1. Design *4-bit Adder-Subtractor* using schematic diagram.
-2. Implement *4-bit ALU Module* and it's application.
+#### 2.2.1 Latches Introduction
 
-#### 2.2 Experiment Principle
+- Sufficient conditions to compose a Latch are:
+  1. The device can maintain a given state for a long term;
+  2. The device has two stable states: 0 and 1;
+  3. The device can change its state asynchronously under certain conditions.
+- Most basic latch types are: *SR Latch* and *D Latch*.
 
-##### 2.2.1 1-bit Full Adder
+Since a latch has two stable states, it's also called as a **bistable circuit**.
 
-An 1-bit full adder implements the function of addition (with carry operand considered). And it has:
+#### 2.2.2 SR Latch
 
-- 3 **inputs:** Data bit $A_i$ and $B_i$, and carry input $C_i$.
 
-- 2 **outputs:** Current bit sum $S_i$ and the carry output $C_{i+1}$.
 
-The truth table of a 1-bit full adder is as follows:
-
-| $A_i$ | $B_i$ | $C_i$ | $S_i$ | $C_{i+1}$ |
-| :---: | :--: | :--: | :--: | :--: |
-| 0 | 0 | 0 | 0 | 0 |
-| 0 | 0 | 1 | 1 | 0 |
-| 0 | 1 | 0 | 1 | 0 |
-| 0 | 1 | 1 | 0 | 1 |
-| 1 | 0 | 0 | 1 | 0 |
-| 1 | 0 | 1 | 0 | 1 |
-| 1 | 1 | 0 | 0 | 1 |
-| 1 | 1 | 1 | 1 | 1 |
-
-From the truth table we can obtain the logic functions of $S_i$ and $C_{i+1}$:
-
-$$
-S_i = A_i \otimes B_i \otimes C_i	\\
-C_{i+1} = A_iB_i + B_iC_i + C_iA_i
-$$
-And these functions enable us to design the 1-bit full adder module schematically in the later section.
-
-##### 2.2.2 n-bit Ripple-Carry Full Adder
-
-- N-bit full adder can be constructed by concatenating several 1-bit full adders.
-
-- Since the carry is propagated bit-by-bit, results of more significant bits are produced slowly. And the delay is longer when the number of bits is bigger.
-
-An intuitional diagram of a *n-bit Ripple-Carry Adder*:
-
-<img src="Expr9/RippleCarryAdder.png" alt="RippleCarryAdder" style="zoom:48%;" />
-
-We'll design our 4-bit full adder *Adder4b* according to this diagram, which will be shown in the later section.
-
-##### 2.2.3 1-bit Full Adder-Subtractor
+#### 2.2.3 1-bit Full Adder-Subtractor
 
 As we know, the target of a **subtractor** is to implement the function of *subtraction* — i.e. addition between a positive number and a negative one. 
 
@@ -106,7 +76,7 @@ With the characteristic of XOR2 Gates which lets the XOR2 Gate to **invert** one
 
 An intuitional diagram of Full Adder-Subtractor will be shown in the next section.
 
-##### 2.2.4 n-bit Ripple-Carry Full Adder-Subtractor
+#### 2.2.4 n-bit Ripple-Carry Full Adder-Subtractor
 
 - Using 2's complement addition, the subtrahend is regarded as its opposite number and converted to 2's complement. (Principle stated in 2.2.3.)
 
@@ -121,7 +91,7 @@ A diagram of the n-bit Ripple-Carry Full Adder-Subtractor is as the following:
 
 We'll design our 4-bit full adder-subtractor *AddSub4b* according to this diagram, which will be shown in the later section.
 
-##### 2.2.5 4-bit Arithmetic and Logic Unit (ALU)
+#### 2.2.5 4-bit Arithmetic and Logic Unit (ALU)
 
 An Arithmetic and Logic Unit, so-called an ALU, is an essential and very important component in a Central Processing Unit (CPU). An ALU is supposed to be capable of:
 
@@ -134,24 +104,24 @@ It's easy to infer that some **Multiplexers** must be used to **select** the out
 
 Since the implementation of modules *myAnd2b4* and *myOr2b4* is not given, it's also our task to design those modules.
 
-##### 2.2.6 Some auxiliary modules
+#### 2.2.6 Some auxiliary modules
 
 There're several auxiliary modules needed in order to implement our target function functional correct and user-friendly. They will be introduced and discussed in §4.3.
 
-### §3 Main Instruments & Materials
+## §3 Main Instruments & Materials
 
-#### 3.1 Experiment Instruments
+### 3.1 Experiment Instruments
 
 1. A Computer with ISE 14.7 Installed
 2. SWORD Board
 
-#### 3.2 Experiment Materials
+### 3.2 Experiment Materials
 
 None.
 
-### §4 Experiment Procedure & Operations
+## §4 Experiment Procedure & Operations
 
-#### 4.1 Design *4-bit Adder-Subtractor* using schematic diagram
+### 4.1 Design *4-bit Adder-Subtractor* using schematic diagram
 
 1. Create a new ISE project named "*MyALU*" with Top Level Source Type *HDL*.
 
@@ -227,7 +197,7 @@ None.
 
 9. Create Schematic Symbol of *AddSub4b* for later use.
 
-#### 4.2 Implement *4-bit ALU Module*
+### 4.2 Implement *4-bit ALU Module*
 
 2. Create new Schematic source file named "*ALUb4*".
 2. To implement our ALU, we need modules *MyAND2b4* and *MyOR2b4*. So create new schematic source files and implement them by drawing the diagram. (as the following) Then create schematic symbols for our ALU.
@@ -292,7 +262,7 @@ None.
    ```
 
 
-#### 4.3 Sum all things up and make them Operable
+### 4.3 Sum all things up and make them Operable
 
 1. Create new Verilog Module source file "*Top.v*".
 
@@ -417,9 +387,9 @@ None.
 
 8. Operate on the SWORD Board according to the truth table to verify whether the module implemented the desired function.
 
-### §5 Results & Analysis
+## §5 Results & Analysis
 
-#### 5.1 Design *4-bit Adder-Subtractor* using schematic diagram
+### 5.1 Design *4-bit Adder-Subtractor* using schematic diagram
 
 1. "Check Design Rules" on module `AddSub4b` didn't return any errors.
 
@@ -433,7 +403,7 @@ None.
 
 **Analysis:** From the simulation, we can see that the *AddSub4b Module* implemented our target function.
 
-#### 5.2 Implement *4-bit ALU Module*
+### 5.2 Implement *4-bit ALU Module*
 
 1. The created symbol of "*MyAND2b4*" and "*MyOR2b4*" looks like:
 
@@ -447,7 +417,7 @@ None.
 
 **Analysis:** From the simulation, we can see that the *MyALU Module* implemented our target function.
 
-#### 5.3 Sum all things up and make them Operable
+### 5.3 Sum all things up and make them Operable
 
 1. After modifying user constraint file, the correspondence of the I/O and the Pins (Pinout Report) is as shown in the following figure.
 
