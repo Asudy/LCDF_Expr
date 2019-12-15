@@ -61,52 +61,73 @@ Since a latch has two stable states, it's also called as a **bistable circuit**.
 
 #### 2.2.2 SR Latch
 
+Connect inputs and outputs of two *input inverting logic components* crosswise, and use the other input as the external information input. This constitutes the simplest *SR Latch*.
 
+Since we have both *NOR Gates* and *NAND Gates* as the *input inverting logic components*, there're two different ways to implement our simplest *SR Latch*. Their schematics and state tables are as follows:
 
-#### 2.2.3 1-bit Full Adder-Subtractor
+##### 1. NOR SR Latch:
 
-As we know, the target of a **subtractor** is to implement the function of *subtraction* — i.e. addition between a positive number and a negative one. 
+<img src="Expr10/01NORSRLatch.png" alt="01NORSRLatch" style="zoom:48%;" />
 
-To convert a positive number (subtrahend) to its *opposite number* for subtraction, we need to obtain its **2's complement** with some functional circuit which can:
+##### 2. NAND SR Latch:
 
-1. **Invert** the subtrahend *bit-by-bit* to obtain its **1's complement**.
-2. **Add 1** to the obtained number.
+<img src="Expr10/02NANDSRLatch.png" alt="02NANDSRLatch" style="zoom:48%;" />
 
-With the characteristic of XOR2 Gates which lets the XOR2 Gate to **invert** one input with 1 applied to the other input and **maintain** one input with 0 applied, we can use a *control signal* to decide whether to **"invert"** an input bit (subtrahend, for example). And based on a 1-bit Full Adder, when we also connect the *control signal* to the *Carry Input*, it **adds 1** to the result, which can be seen as adding 1 to the subtrahend as well, thus implements the operation of obtaining **2's complement of the subtrahend**. 
+#### 2.2.3 Gated SR Latch
 
-An intuitional diagram of Full Adder-Subtractor will be shown in the next section.
+As you may imagine, the simplest *SR Latch* is an **asynchronous** circuit, which means it will change its state whenever the input changes (if defined). The *Gated SR Latch* added a *Control (Clock)* input to determine when the state of the latch should change so that it can be used in a **synchronous** circuit. To implement that function, we add 2 more NAND Gates to the simplest SR Latch shown above, which is like:
 
-#### 2.2.4 n-bit Ripple-Carry Full Adder-Subtractor
+<img src="Expr10/03GatedSR.png" alt="03GatedSR" style="zoom:48%;" />
 
-- Using 2's complement addition, the subtrahend is regarded as its opposite number and converted to 2's complement. (Principle stated in 2.2.3.)
+The state table tells us that the state of the latch can only be changed during the interval when C = 1.
 
-- The Adder-Subtractor shares the design of n-bit Ripple-Carry Full Adder.
+#### 2.2.4 D Latch
 
-- It uses XOR Gates with a *control signal* connected to do the invert action, and the least significant bit's carry $C_0$ is also connected to the *control signal*.
-- When the *control signal Ctr* is 0, it runs on the **Adder Mode**. And when *Ctr* is 1, it runs on the **Subtractor Mode**, which can be simply switched by changing a switch.
+The disadvantage of a *SR Latch* is obvious: it has an **undefined** behavior, which may cause fatal unstable circuit states (e.g. oscillation) and break the entire system down. Fortunately, the solution is also obvious: eliminating the undefined state. That is what a *D Latch* is designed for. 
 
-A diagram of the n-bit Ripple-Carry Full Adder-Subtractor is as the following:
+The *D Latch* has just 1 data input, to which the output is equal. And it also support a control signal, which means that it can be used in a synchronous circuit as well.
 
-<img src="Expr9/AddSubnb.png" alt="AddSubnb" style="zoom:48%;" />
+<img src="Expr10/04DLatch.png" alt="04DLatch" style="zoom: 60%;" />
 
-We'll design our 4-bit full adder-subtractor *AddSub4b* according to this diagram, which will be shown in the later section.
+#### 2.2.5 Flip-Flop Introduction
 
-#### 2.2.5 4-bit Arithmetic and Logic Unit (ALU)
+There's also a disadvantage about a *D Latch* — it has a phenomenon which is known as **"Data Flip"**. That is, if we use D Latches in a sequential circuit, as long as the *control signal* is valid, the state of the D Latch would change **whenever** the input $D$ changes, rather than remain the original state which is wanted.
 
-An Arithmetic and Logic Unit, so-called an ALU, is an essential and very important component in a Central Processing Unit (CPU). An ALU is supposed to be capable of:
+Therefore, in order to eliminate the Data Flip phenomenon, we need to come up with a circuit that only changes its internal state 1 time for each *trigger*.
 
-1. **Arithmetic Operations:** Calculate addition & subtraction between 2 input numbers and output the result.
-2. **Logic Operations:** Conduct AND & OR operations of 2 input data and give the result.
+- Trigger(v.): To enable a latch to change its internal state in a transient time interval when an external input comes.
+- Trigger(n.): A latch circuit (bistable) which is on the basis of latches and changes its internal state only one time for each trigger.
 
-It's easy to infer that some **Multiplexers** must be used to **select** the output data source. Our ALU in this experiment looks like:
+**The common classification of Flip-Flops:**
 
-<img src="Expr9/ALUeg.png" alt="ALUeg" style="zoom:76%;" />
+<img src="Expr10/05ClassificationFF.png" alt="05ClassificationFF" style="zoom: 40%;" />
 
-Since the implementation of modules *myAnd2b4* and *myOr2b4* is not given, it's also our task to design those modules.
+Common flip-flops are *Master-Slave SR Flip-Flop*, *D Flip-Flop*, *JK Flip-Flop* and *T Flip-Flop*. However we'll only implement the first two in this experiment.
 
-#### 2.2.6 Some auxiliary modules
+#### 2.2.6 Master-Slave SR Flip-Flop
 
-There're several auxiliary modules needed in order to implement our target function functional correct and user-friendly. They will be introduced and discussed in §4.3.
+An *SR Master-Slave Flip-Flop* is comprised by two clock-controlled *SR Latch* series with the clock signal of the second latch inverted. The following diagram shows its structure:
+
+<img src="Expr10/06MSSRFF.png" alt="06MSSRFF" style="zoom:48%;" />
+
+Its behavior follows the following loop:
+
+- When C = 1, the input signal is detected by the left latch (so-called Master latch).
+- When C = 0, the output signal of the Master Latch is detected by the right latch (so-called Slave latch) and it produces the final output $Q$.
+
+It can be seen that the path from input to the final output is separated by different clock signal values, so that the "Data Flip" wouldn't propagate all the way through the device.
+
+#### 2.2.7 Positive-Edge Maintain Obstructive D Flip-Flop
+
+Although the *Master-Slave SR Flip-Flop* solved the problem of Data Flip, it has another problem, known as "**1's Catching**". Its shown in the following figure:
+
+<img src="Expr10/07-1'sCatching.png" alt="07-1'sCatching" style="zoom:48%;" />
+
+The figure above illustrates that if there's a sudden signal of S or R (shorter than the *Control / Clock Signal*), the final output may become something isn't expected.
+
+To solve that problem, we can design some circuit that is only active **at** the edge of the control signal. So, we introduce the *Positive-Edge Maintain Obstructive D Flip-Flop*, which is triggered only at the positive-edge of the $C_P$ signal:
+
+<img src="Expr10/08DFF.png" alt="08DFF" style="zoom:48%;" />
 
 ## §3 Main Instruments & Materials
 
@@ -121,337 +142,184 @@ None.
 
 ## §4 Experiment Procedure & Operations
 
-### 4.1 Design *4-bit Adder-Subtractor* using schematic diagram
+### 4.1 Implement *Basic SR Latch*, verify its function and understand its timing problems.
 
-1. Create a new ISE project named "*MyALU*" with Top Level Source Type *HDL*.
+1. Create a new ISE project named "*MyLATCHS*".
 
-   **Note:** Both 2 tasks will be done in this same project.
+   **Note:** Both 5 tasks will be done in this same project.
 
-2. Create a new Schematic source file named "*AddSub1b*".
+2. Create a new Schematic source file named "*SR_Latch.sch*".
 
-3. Design *AddSub1b* module by drawing schematic diagram (as the figure below which is drawn by me myself). Then create schematic symbol of *AddSub1b* for later use.
+3. Design the module according to the schematic diagram, using NAND2 Gates.
 
-   <img src="Expr9/AddSub1b.png" alt="AddSub1b" style="zoom:75%;" />
+   
 
-4. Create a new Schematic source file named "*AddSub4b*".
-
-5. Design *AddSub4b* module by drawing schematic diagram, invoking the previously designed *AddSub1b* (as the figure below which is drawn by me myself).
-
-   <img src="Expr9/AddSub4b.png" alt="AddSub4b" style="zoom:75%;" />
-
-6. Use "Check Design Rules" to check if there's any design error.
-
-7. (Selective) Run "View HDL Functional Model" to generate and see the Verilog HDL code of the design.
-
-8. Run simulation on *AddSub4b* Module. Excitation code is as the following:
-
-   **Note:** The excitation should cover all 4 operations (as commented in the code fence below) to check if the design is normally functioning.
+4. Run simulation on `SR_Latch` module, main part of the excitation codes are as follows:
 
    ```verilog
-   `timescale 1ns / 1ps
-   module AddSub4b_AddSub4b_sch_tb();
-   
-   // Inputs
-      reg Ctrl;
-      reg [3:0] A;
-      reg [3:0] B;
-       
-   // Output
-      wire [3:0] S;
-      wire Co;
-       
-   // Instantiate the UUT (Unit Under Test)
-      AddSub4b UUT (
-   		.S(S), 
-   		.Ctrl(Ctrl), 
-   		.A(A), 
-   		.B(B), 
-   		.Co(Co)
-      );
    // Initialize Inputs
    	initial begin
-   		Ctrl = 0;
-   		A = 0;
-   		B = 0;
-   		
-   		// TestCase1: Addition, with no carry generated
-   		A = 2;
-   		B = 4;
-   		#100;
-   		// TestCase2: Addition, with carry generated
-   		A = 9;
-   		B = 14;
-   		#100;
-   		// TestCase3: Subtraction, with carry generated (No borrow)
-   		Ctrl = 1;
-   		A = 12;
-   		B = 9;
-   		#100;
-   		// TestCase4: Subtraction, with no carry generated (Borrow)
-   		A = 9;
-   		B = 12;
-   		#100;
-   	end	
-   endmodule
-   ```
-
-9. Create Schematic Symbol of *AddSub4b* for later use.
-
-### 4.2 Implement *4-bit ALU Module*
-
-2. Create new Schematic source file named "*ALUb4*".
-2. To implement our ALU, we need modules *MyAND2b4* and *MyOR2b4*. So create new schematic source files and implement them by drawing the diagram. (as the following) Then create schematic symbols for our ALU.
-
-<center>
-   <img src="Expr9/MyAND2b4.png" alt="MyAND2b4" style="zoom: 40%;" /> <img src="Expr9/MyOR2b4.png" alt="MyOR2b4" style="zoom: 40%;" />
-</center>
-
-3. Use "Add Copy Of Source" to add symbol and schematic files of "*Mux4to1b4*" and "*Mux4to1*" which were implemented in Lab Experiment 7.
-
-   **Note:** The ".sym" file only allows you to use the corresponding **symbol** in the schematic files of the current project, while the ".vf" or the ".sch" file is the one which **defines the function** of it. (So you only need either ".vf" or ".sch" along with the ".sym" file to make a user-designed component work.)
-
-4. Make sure symbol "AddSub4b", "Mux4to1b4", "*Mux4to1*", "MyAND2b4" and "MyOR2b4" can be found in the "symbol" list (should be first ones).
-
-5. We can finally design our ALU Module as the diagram shown below:
-
-   <img src="Expr9/ALUb4.png" alt="ALUb4" style="zoom:75%;" />
-
-6. Use "Check Design Rules" to check if there's any design error.
-
-7. Run simulation on `MyALU` Module. Excitation code is as the following:
-
-   **Note:** The excitation code should cover all 4 operations (as commented in the code fence below) to check if the design is normally functioning.
-
-   ```verilog
-   `timescale 1ns / 1ps
-   
-   module ALUb4_ALUb4_sch_tb();
-   // Inputs
-      	reg [3:0] A;
-      	reg [3:0] B;
-      	reg [1:0] S;
-   
-   // Output
-      	wire Co;
-      	wire [3:0] C;
-       
-   // Instantiate the UUT
-      	ALUb4 UUT (
-   		.A(A), 
-   		.B(B), 
-   		.S(S), 
-   		.Co(Co), 
-   		.C(C)
-      	);
-   // Initialize Inputs
-   	integer i;
-   	initial begin
-   		A = 0;
-   		B = 0;
-   		S = 0;
-   		
-   		A = 4'b1010;	B = 4'b0111;
-   		#100;
-   		B = 4'b0011;
-           for ( i=0; i<4; i=i+1 ) begin	// Test all 4 cases
-   			S = i;
-   			#100;
-   		end
+   		R = 1;	S = 1;	#50;
+   		R = 1;	S = 0;	#50;
+   		R = 1;	S = 1;	#50;
+   		R = 0;	S = 1;	#50;
+   		R = 1;	S = 1;	#50;
+   		R = 0;	S = 0;	#50;
+   		R = 1;	S = 1;	#50;
    	end
-   endmodule
    ```
 
+### 4.2 Implement *Gated SR Latch*, verify its function and understand its timing problems.
 
-### 4.3 Sum all things up and make them Operable
+1. Create a new Schematic source file named "*CSR_Latch.sch*".
+2. Design the module according to the schematic diagram, using NAND2 Gates.
 
-1. Create new Verilog Module source file "*Top.v*".
 
-2. Right-click the module *Top* and **Set it as Top Module**.
 
-3. Add copy of source "*clkdiv.v*", "*disp_num.v*" and "*CreateNumber.v*".
-
-4. Modify the `CreateNumber` Module so that we can not only use buttons to increase a digit, **but also decrease** it using a single button.
-
-   The original `CreateNumber` Module was like:
+3. Run simulation on `CSR_Latch` module, show the **Data Flip** phenomenon. Main part of the excitation codes are as follows:
 
    ```verilog
-   module CreateNumber(
-   	input wire [3:0] btn,
-   	output reg [15:0] num
-   	);
-   	wire [3:0] A,B,C,D;
-   	
-   	initial num <= 16'b1010_1011_1100_1101;
-   	
-   	assign A = num[3:0]   + 4'd1;
-   	assign B = num[7:4]   + 4'd1;
-   	assign C = num[11:8]  + 4'd1;
-   	assign D = num[15:12] + 4'd1;
-   	
-   	always @ (posedge btn[0]) num[3:0]   <= A;
-   	always @ (posedge btn[1]) num[7:4]   <= B;
-   	always @ (posedge btn[2]) num[11:8]  <= C;
-   	always @ (posedge btn[3]) num[15:12] <= D;
-   
-   endmodule
+// Initialize Inputs
+	initial begin
+		C = 0;
+		S = 0;
+		R = 0;
+		
+		#50 S = 1;
+		#50 C = 1;
+		#50 S = 0;
+		#20 R = 1;
+		#40 R = 0;
+		#50 S = 1;
+		#50 C = 0;
+		#20 S = 0;
+	end
    ```
 
-   We can see that its 9-12 rows were the statements that implemented the "increase by 1" function. To obtain our target function as stated above, we need to modify those rows with our *AddSub4b* Module, and of course, add 4 switches `wire [3:0] sw` to determine on which mode should the `CreateNumber` module operate:
+2. Generate schematic symbol of `CSR_Latch` module for later use in `MS_FlipFlop`.
+
+### 4.3 Implement *D Latch*, verify its function and understand its timing problems.
+
+1. Create a new Schematic source file named "*D_Latch.sch*".
+
+2. Design the module according to the schematic diagram, using NAND2 Gates.
+
+   
+
+3. Run simulation on `D_Latch` module, show the **Data Flip** phenomenon. Main part of the excitation codes are as follows:
+
+    ```verilog
+    // Initialize Inputs
+        initial begin
+            C = 0;
+            D = 0;
+
+            #50 D = 1;
+            #50 C = 1;
+            #50 D = 0;
+            #50 D = 1;
+            #50 C = 0;
+            #20 D = 0;
+        end
+    ```
+
+### 4.4 Implement *SR Master-Slave Flip-Flop*, verify its function and understand its timing problems.
+
+1. Create a new Schematic source file named "*MS_FlipFlop*".
+
+2. Design the module according to the schematic diagram, invoking the `CSR_Latch` module.
+
+   
+
+3. Run simulation on `MS_FlipFlop` module, show the **1's Catching** phenomenon. Main part of the excitation codes are as follows:
 
    ```verilog
-   module CreateNumber(
-   	...
-       input wire [3:0] sw,
-       ...);
-       
-       ...
-   	AddSub4b a1(.A(num[ 3: 0]), .B(4'b1), .Ctrl(sw[0]), .S(A));
-   	AddSub4b a2(.A(num[ 7: 4]), .B(4'b1), .Ctrl(sw[1]), .S(B));
-   	AddSub4b a3(.A(num[11: 8]), .B(4'b1), .Ctrl(sw[2]), .S(C));
-   	AddSub4b a4(.A(num[15:12]), .B(4'b1), .Ctrl(sw[3]), .S(D));
-       ...
-       
-   endmodule
+   // Initialize Inputs
+   	always begin
+   		#50 C = ~C;
+   	end
+   	
+   	initial begin
+   		C = 0;
+   		#40 S = 0;
+   		R = 0;
+   		#100 S = 1;
+   		#100 S = 0;
+   		#100 R = 1;
+   		#100 R = 0;
+   		#100 S = 1;	#20 S = 0;
+   		#5	  R = 1;	#15 R = 0;
+   		#60  S = 1;	#20 S = 0;
+   		#140 S = 1; R = 1;
+   		#100 S = 0; R = 0;
+   	end
    ```
 
-5. Create a new Module `pbdebounce` for a *Button Anti-jitter* (VERY IMPORTANT!)
 
-   1. The **reason** for an anti-jitter: When a button is pressed down or bounce up, there'd be a **mechanical vibration**. And the period of the vibration is usually between 10~20ms.
-   2. The **principle** of an anti-jitter: DELAY to judge the status of buttons to get rid of those mechanical vibrations.
+### 4.5 Implement *D Flip-Flip* and verify its function.
 
-   A anti-jitter can be implemented by the following code block:
+1. Create a new schematic source file named as "*D_FlipFlop*"
+
+2. Design the module according to the schematic diagram, using NAND3 Gates.
+
+   <img src="Expr10/D_FlipFlop_sch.jpg" alt="D_FlipFlop_sch" style="zoom:75%;" />
+
+3. Run simulation on `D_FlipFlop` module. Main part of the excitation codes are as follows:
 
    ```verilog
-   module pbdeBounce(
-       input wire clk_1ms,
-       input wire button,
-       output reg pbreg
-       );
-   
-       reg [7:0] pbshift;
-   
-       always @ (posedge clk_1ms) begin
-           pbshift = pbshift << 1;
-           pbshift[0] = button;
-           if ( pbshift == 8'b0 ) pbreg = 0;
-           if ( pbshift == 8'hFF ) pbreg = 1;
-       end
-   
-   endmodule
+   // Initialize Inputs
+   	initial begin
+   		C = 0;
+   		D = 0;
+   		#125 D = 1;
+   		#100 D = 0;
+   	end
+   	
+   	always begin
+   		#50 C = ~C;
+   	end
    ```
-
-   Since the input clock period is 1ms, the code above means that one needs to be continuously pressing a button for at least **8ms** to trigger a button. This module is really helpful because we want to decide when a digit should be increased *by ourselves* rather than *by the mechanical vibration*.
-
-6. Now we have all needed modules for our user-friendly project. Sum things up in "Top.v" as the following:
-
-   ```verilog
-   module top(
-   	input wire clk,
-   	input wire [1:0] FuncSW,	// Control functions (00-Addition, 01-Subtraction, 10-AND, 11-OR)
-   	input wire [1:0] btn,		// Press to Increase / Decrease
-   	input wire [1:0] SW,		// Determine the Increasing / Decreasing mode of the operands
-   	output wire [3:0] AN,
-   	output wire [7:0] SEG,
-   	output wire BTNX4			// Low-voltage Enable of buttons
-   	);
-   	wire [15:0] num;
-   	wire [1:0] btn_out;
-   	wire [3:0] C;
-   	wire Co;
-   	wire [31:0] clk_div;
-   
-   	pbdeBounce m0(clk_div[17], btn[0], btn_out[0]);
-   	pbdeBounce m1(clk_div[17], btn[1], btn_out[1]);
-   	
-   	clk_div m2(clk, 1'b0, clk_div);
-   
-   	CreateNumber c0({2'b0,btn_out[1],btn_out[0]}, {2'b0,SW[1],SW[0]}, num);
-   	
-   	ALUb4 m5(num[7:4], num[3:0], FuncSW, C, Co);
-   	
-   	disp_num d0(clk, {num[7:0],3'b0,Co,C}, 4'b0, 4'b0, 1'b0, AN, SEG);
-   	assign BTNX4 = 0;	// Assign this 0 to make on-board buttons valid
-   
-   endmodule
-   ```
-
-   **Note:** Usage of `BTNX4`: Since we need to use buttons on the SWORD Board, we need an output (`BTNX4` in this case) which is connected to *rows* of the keypad to ENABLE (set to 0) that row of buttons. When a row of buttons are enabled and *columns* of buttons are connected to top module inputs, our module becomes able to detect input signals generated by a button located in a certain row and a certain column.
-
-   We can see from the code fence above that *Switch Inputs* are separated into two wire variables `FuncSW` and `SW`. This action may be helpful to determine functions of each switch used.
-
-7. Create the **User Constraint File**, generate programming file and upload the design to the SWORD Board and verify the function of `MyALU` Module. The correspondence of the I/O and  the Pins can be seen in **"Pinout Report"** in **"Design Summary"**. The **User Constraint File** (UCF) is as follows:
-
-   **Note:** Remember to write `NET "btn[i]" clock_dedicated_route = false` in order to make that column of buttons usable.
-
-   <img src="Expr9/ucf.png" alt="ucf" style="zoom:75%;" />
-
-8. Operate on the SWORD Board according to the truth table to verify whether the module implemented the desired function.
 
 ## §5 Results & Analysis
 
-### 5.1 Design *4-bit Adder-Subtractor* using schematic diagram
+### 5.1 Implement *Basic SR Latch*, verify its function and understand its timing problems.
 
-1. "Check Design Rules" on module `AddSub4b` didn't return any errors.
+The simulation result was as the follows:
 
-2. The created symbol of "*AddSub4b*" looks like:
+<img src="Expr10/SR_Latch_sim.jpg" alt="SR_Latch_sim" style="zoom:75%;" />
 
-   <img src="Expr9/AddSub4b_sym.png" alt="AddSub4b_sym" style="zoom:75%;" />
+**Analysis:** From the simulation, we can see that the `SR_Latch` Module implemented our desired function.
 
-3. Simulation result was as the following:
+### 5.2 Implement *Gated SR Latch*, verify its function and understand its timing problems.
 
-   <img src="Expr9/AddSub4b_sim.PNG" alt="AddSub4b_sim" style="zoom:75%;" />
+The simulation result was as the follows:
 
-**Analysis:** From the simulation, we can see that the *AddSub4b Module* implemented our target function.
+<img src="Expr10/CSR_Latch_sim_DataFlip.jpg" alt="CSR_Latch_sim_DataFlip" style="zoom:75%;" />
 
-### 5.2 Implement *4-bit ALU Module*
+**Analysis:** From the simulation, we can see that the `CSR_Latch` Module implemented our desired function. And the *Data Flip* phenomenon can be seen from the diagram clearly (100ns ~ 300ns).
 
-1. The created symbol of "*MyAND2b4*" and "*MyOR2b4*" looks like:
+### 5.3 Implement *D Latch*, verify its function and understand its timing problems.
 
-   <img src="Expr9/MyAND2b4_sym.png" alt="MyAND2b4_sym" style="zoom:75%;" />
+The simulation result was as the follows:
 
-2. "Check Design Rules" on module `MyALU` didn't return any errors.
+<img src="Expr10/D_Latch_sim_DataFlip.jpg" alt="D_Latch_sim_DataFlip" style="zoom:75%;" />
 
-3. Simulation result was as the following:
+**Analysis:** From the simulation, we can see that the `D_Latch` Module implemented our desired function. And the *Data Flip* phenomenon can be seen from the diagram clearly(100ns ~ 300ns).
 
-   <img src="Expr9/ALUb4_sim.PNG" alt="ALUb4_sim" style="zoom:75%;" />
+### 5.4 Implement *SR Master-Slave Flip-Flop*, verify its function and understand its timing problems.
 
-**Analysis:** From the simulation, we can see that the *MyALU Module* implemented our target function.
+The simulation result was as the follows:
 
-### 5.3 Sum all things up and make them Operable
+<img src="Expr10/MS_FlipFlop_sim_1sCatching.jpg" alt="MS_FlipFlop_sim_1sCatching" style="zoom:75%;" />
 
-1. After modifying user constraint file, the correspondence of the I/O and the Pins (Pinout Report) is as shown in the following figure.
+**Analysis:** From the simulation, we can see that the `MS_FlipFlop` Module implemented our desired function. And the *1's Catching* phenomenon can be seen from the diagram clearly (520ns ~ 660ns).
 
-   <img src="Expr9/Pinout.png" alt="Pinout" style="zoom:75%;" />
+### 5.5 Implement *D Flip-Flip* and verify its function.
 
-2. The Top Module passed all checks and the programming file was generated successfully.
+The simulation result was as the follows:
 
-3. After uploading and operating on the SWORD Board, it was clear that the Top Module worked correctly. All input combinations and outputs satisfied the truth table.
+<img src="Expr10/D_FlipFlop_sim.jpg" alt="D_FlipFlop_sim" style="zoom:75%;" />
 
-   **Note:** I used the **leftmost 2 switches** to control the mode of `MyALU`, which will be shown in the following pictures.
-
-   **Addition:**
-
-   <img src="Expr9/Result_Addition.JPG" alt="Result_Addition" style="zoom: 9%;" />
-
-   **Subtraction:**
-
-   <img src="Expr9/Result_Subtraction.JPG" alt="Result_Subtraction" style="zoom:9%;" />
-
-   **AND Operation:**
-   
-   <img src="Expr9/Result_AND.JPG" alt="Result_AND" style="zoom:9%;" />
-   
-   **OR Operation:**
-   
-   <img src="Expr9/Result_OR.JPG" alt="Result_OR" style="zoom:9%;" />
-
-**Analysis:** It can be seen from above pictures that our design has passed the physical verification. And so far, the desired functions of this experiment which were:
-
-1. Operands A & B should be 4-bit;
-2. Use two buttons for self-increment / decrement of two operands;
-3. Obtain operation result C and carry Co with a self-designed 4-bit ALU;
-4. Display A, B, C and Co to the 7-segment digital tube displays.
-
-were correctly implemented. The experiment was successful.
+**Analysis:** From the simulation, we can see that the `D_FlipFlop` Module implemented our desired function. The experiment was successful.
 
 <div style="page-break-after: always;"></div>
