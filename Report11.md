@@ -116,17 +116,19 @@ None.
    	end
    ```
    
-5. 
+5. Create clock
+
+6. Top
 
 ### 4.2 Implement a 16-bit reversible binary synchronous counter
 
-1. Create a new Schematic source file named "*CSR_Latch.sch*".
+1. Create a new ISE project named "*MyRevCounter*" with Top Level Source Type *HDL*.
 
-2. Design the module according to the schematic diagram, using NAND2 Gates.
+2. Create a new Verilog HDL source file named "*RevCounter.v*".
 
-   <img src="Expr10/CSR_Latch_sch.png" alt="CSR_Latch_sch" style="zoom: 60%;" />
+   
 
-3. Run simulation on `CSR_Latch` module, show the **Data Flip** phenomenon. Main part of the excitation codes are as follows:
+3. Run simulation on `RevCounter` module, show the **Data Flip** phenomenon. Main part of the excitation codes are as follows:
 
    ```verilog
    // Initialize Inputs
@@ -146,89 +148,9 @@ None.
    end
    ```
 
-4. Generate schematic symbol of `CSR_Latch` module for later use in `MS_FlipFlop`.
+4. 100ms clock
 
-### 4.3 Implement *D Latch*, verify its function and understand its timing problems.
-
-1. Create a new Schematic source file named "*D_Latch.sch*".
-
-2. Design the module according to the schematic diagram, using NAND2 Gates.
-
-   <img src="Expr10/D_Latch_sch.png" alt="D_Latch_sch" style="zoom: 50%;" />
-
-3. Run simulation on `D_Latch` module, show the **Data Flip** phenomenon. Main part of the excitation codes are as follows:
-
-    ```verilog
-    // Initialize Inputs
-        initial begin
-            C = 0;
-            D = 0;
-
-            #50 D = 1;
-            #50 C = 1;
-            #50 D = 0;
-            #50 D = 1;
-            #50 C = 0;
-            #20 D = 0;
-        end
-    ```
-
-### 4.4 Implement *SR Master-Slave Flip-Flop*, verify its function and understand its timing problems.
-
-1. Create a new Schematic source file named "*MS_FlipFlop*".
-
-2. Design the module according to the schematic diagram, invoking the `CSR_Latch` module.
-
-   <img src="Expr10/MS_FlipFlop_sch.png" alt="MS_FlipFlop_sch" style="zoom: 45%;" />
-
-3. Run simulation on `MS_FlipFlop` module, show the **1's Catching** phenomenon. Main part of the excitation codes are as follows:
-
-   ```verilog
-   // Initialize Inputs
-   	always begin
-   		#50 C = ~C;
-   	end
-   	
-   	initial begin
-   		C = 0;
-   		#40 S = 0;
-   		R = 0;
-   		#100 S = 1;
-   		#100 S = 0;
-   		#100 R = 1;
-   		#100 R = 0;
-   		#100 S = 1;	#20 S = 0;
-   		#5	  R = 1;	#15 R = 0;
-   		#60  S = 1;	#20 S = 0;
-   		#140 S = 1; R = 1;
-   		#100 S = 0; R = 0;
-   	end
-   ```
-
-
-### 4.5 Implement *D Flip-Flip* and verify its function.
-
-1. Create a new schematic source file named as "*D_FlipFlop*"
-
-2. Design the module according to the schematic diagram, using NAND3 Gates.
-
-   <img src="Expr10/D_FlipFlop_sch.jpg" alt="D_FlipFlop_sch" style="zoom: 60%;" />
-
-3. Run simulation on `D_FlipFlop` module. Main part of the excitation codes are as follows:
-
-   ```verilog
-   // Initialize Inputs
-   	initial begin
-   		C = 0;
-   		D = 0;
-   		#125 D = 1;
-   		#100 D = 0;
-   	end
-   	
-   	always begin
-   		#50 C = ~C;
-   	end
-   ```
+5. Top module
 
 ## §5 Results & Analysis
 
@@ -247,29 +169,5 @@ The simulation result was as the follows:
 <img src="Expr10/CSR_Latch_sim_DataFlip.jpg" alt="CSR_Latch_sim_DataFlip" style="zoom:75%;" />
 
 **Analysis:** From the simulation, we can see that the `CSR_Latch` Module implemented our desired function. And the *Data Flip* phenomenon can be seen from the diagram clearly (100ns ~ 300ns).
-
-### 5.3 Implement *D Latch*, verify its function and understand its timing problems.
-
-The simulation result was as the follows:
-
-<img src="Expr10/D_Latch_sim_DataFlip.jpg" alt="D_Latch_sim_DataFlip" style="zoom:75%;" />
-
-**Analysis:** From the simulation, we can see that the `D_Latch` Module implemented our desired function. And the *Data Flip* phenomenon can be seen from the diagram clearly(100ns ~ 300ns).
-
-### 5.4 Implement *SR Master-Slave Flip-Flop*, verify its function and understand its timing problems.
-
-The simulation result was as the follows:
-
-<img src="Expr10/MS_FlipFlop_sim_1sCatching.jpg" alt="MS_FlipFlop_sim_1sCatching" style="zoom:75%;" />
-
-**Analysis:** From the simulation, we can see that the `MS_FlipFlop` Module implemented our desired function. And the *1's Catching* phenomenon can be seen from the diagram clearly (520ns ~ 660ns).
-
-### 5.5 Implement *D Flip-Flip* and verify its function.
-
-The simulation result was as the follows:
-
-<img src="Expr10/D_FlipFlop_sim.jpg" alt="D_FlipFlop_sim" style="zoom: 80%;" />
-
-**Analysis:** From the simulation, we can see that the `D_FlipFlop` Module implemented our desired function. The experiment was successful.
 
 <div style="page-break-after: always;"></div>
