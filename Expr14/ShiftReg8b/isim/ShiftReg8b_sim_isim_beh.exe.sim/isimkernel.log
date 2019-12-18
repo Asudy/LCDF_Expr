@@ -1,0 +1,28 @@
+Command line:
+   ShiftReg8b_sim_isim_beh.exe
+     -simmode  gui
+     -simrunnum  0
+     -socket  61893
+
+Wed Dec 18 19:16:55 2019
+
+
+ Elaboration Time: 0.078125 sec
+
+ Current Memory Usage: 5183.85 Meg
+
+ Total Signals          : 126
+ Total Nets             : 72
+ Total Signal Drivers   : 65
+ Total Blocks           : 35
+ Total Primitive Blocks : 33
+ Total Processes        : 92
+ Total Traceable Variables  : 38
+ Total Scalar Nets and Variables : 179
+
+ Total Simulation Time: 0.09375 sec
+
+ Current Memory Usage: 5026.56 Meg
+
+Wed Dec 18 19:20:22 2019
+

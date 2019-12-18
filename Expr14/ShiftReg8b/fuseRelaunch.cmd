@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -lib "unisims_ver" -lib "unimacro_ver" -lib "xilinxcorelib_ver" -lib "secureip" -o "E:/wjz/Expr14/ShiftReg8b/ShiftReg8b_sim_isim_beh.exe" -prj "E:/wjz/Expr14/ShiftReg8b/ShiftReg8b_sim_beh.prj" "work.ShiftReg8b_sim" "work.glbl" 

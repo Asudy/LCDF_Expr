@@ -1,0 +1,1 @@
+xst -intstyle ise -ifn "E:/wjz/Expr14/ShiftReg8b/ShiftReg8b.xst" -ofn "E:/wjz/Expr14/ShiftReg8b/ShiftReg8b.syr" 
