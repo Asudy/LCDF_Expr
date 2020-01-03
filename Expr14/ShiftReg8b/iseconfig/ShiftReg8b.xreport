@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2019-12-18T20:01:38</DateModified>
+  <DateModified>2019-12-21T12:15:56</DateModified>
   <ModuleName>ShiftReg8b</ModuleName>
   <SummaryTimeStamp>2019-12-18T19:07:15</SummaryTimeStamp>
-  <SavedFilePath>E:/wjz/Expr14/ShiftReg8b/iseconfig/ShiftReg8b.xreport</SavedFilePath>
-  <ImplementationReportsDirectory>E:/wjz/Expr14/ShiftReg8b\</ImplementationReportsDirectory>
+  <SavedFilePath>D:/Asudy/WorkSpace/LCDF_Expr/ISEProjects/Expr14/ShiftReg8b/iseconfig/ShiftReg8b.xreport</SavedFilePath>
+  <ImplementationReportsDirectory>D:/Asudy/WorkSpace/LCDF_Expr/ISEProjects/Expr14/ShiftReg8b\</ImplementationReportsDirectory>
   <DateInitialized>2019-12-18T17:48:53</DateInitialized>
   <EnableMessageFiltering>false</EnableMessageFiltering>
  </header>

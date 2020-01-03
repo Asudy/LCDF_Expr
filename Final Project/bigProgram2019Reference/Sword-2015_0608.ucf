@@ -1,0 +1,553 @@
+############################################################################
+# Timing constraints                                                       #
+############################################################################
+
+	NET "CLK" 		 							TNM_NET = TM_CLK ;
+	TIMESPEC TS_CLKIN 	 	 					= PERIOD "TM_CLK"       20 ns HIGH 50%;
+                                        		
+	NET "*s_SYS_CLK"  	 						TNM_NET = TM_SYS_CLK;
+ 	TIMESPEC TS_SYS_CLK 	 					= PERIOD "TM_SYS_CLK"   10 ns HIGH 50%;
+    
+    NET "*s_SYS_CLK100M"  	 					TNM_NET = TM_CLK_100M;
+ 	TIMESPEC TS_SYS_CLK 	 					= PERIOD "TM_CLK_100M"  10 ns HIGH 50%;
+ 	                                    		
+ 	NET "*s_SYS_CLK50M"  	 					TNM_NET = TM_CLK_50M ;
+ 	TIMESPEC TS_CLK_50M 	 					= PERIOD "TM_CLK_50M"   20 ns HIGH 50%;
+                                        		
+  	NET "*s_SYS_CLK375M"  	 					TNM_NET = TM_CLK_250M ;
+  	TIMESPEC TS_CLK_375M 	 					= PERIOD "TM_CLK_250M"   4 ns HIGH 50%;
+  	
+  	NET "*s_TMDS_RXC"  	 						TNM_NET = TM_TMDS_RXC ;
+ 	TIMESPEC TS_TMDS_RXC	 					= PERIOD "TM_TMDS_RXC"  20 ns HIGH 50%;
+ 	
+	NET "*s_UI_CLK"  	 						TNM_NET = TM_UI_CLK ;
+ 	TIMESPEC TS_UI_CLK	 						= PERIOD "TM_UI_CLK"     5 ns HIGH 50%;
+  		
+  	TIMESPEC "TS_100M_CLK_to_RXC_CLK" 			= FROM "TM_SYS_CLK"  TO "TM_TMDS_RXC"   10 ns DATAPATHONLY ;
+	TIMESPEC "TS_RXC_CLK_to_100M_CLK" 			= FROM "TM_TMDS_RXC" TO "TM_SYS_CLK"    10 ns DATAPATHONLY ;
+                                        		
+	TIMESPEC "TS_100M_CLK_to_50M_CLK" 			= FROM "TM_SYS_CLK"  TO "TM_CLK_50M"    10 ns DATAPATHONLY ;
+	TIMESPEC "TS_50M_CLK_to_100M_CLK" 			= FROM "TM_CLK_50M"  TO "TM_SYS_CLK"    10 ns DATAPATHONLY ;
+	
+	TIMESPEC "TS_SYS_CLK_to_UI_CLK" 			= FROM "TM_SYS_CLK"  TO "TM_UI_CLK"   	 5 ns DATAPATHONLY ;
+	TIMESPEC "TS_UI_CLK_to_SYS_CLK" 			= FROM "TM_UI_CLK" TO "TM_SYS_CLK"    	10 ns DATAPATHONLY ;
+    
+    TIMESPEC "TS_UI_CLK_to_MIG_CLK" 			= FROM "TM_UI_CLK"  TO "TM_MIG_CLK"   	 5 ns DATAPATHONLY ;
+	TIMESPEC "TS_MIG_CLK_to_UI_CLK" 			= FROM "TM_MIG_CLK" TO "TM_UI_CLK"    	 5 ns DATAPATHONLY ;   
+                                        		
+ 	NET "*XRST*" 								TIG ;
+ 	NET "*RST*" 								TIG ;
+ 	
+ 	TIMESPEC "TS_PADS_to_FFS" 					= FROM PADS("TMDS*") TO FFS  10 ns ;
+	TIMESPEC "TS_FFS_to_PADS" 					= FROM FFS TO PADS("TMDS*")  10 ns ;
+	
+	INST "U_HDMI_CTRL/U_LVDS_RX/U_MMCME2_ADV3/clkin1_buf" 		LOC = BUFGCTRL_X0Y11    ;
+	INST "U_HDMI_CTRL/U_LVDS_RX/U_MMCME2_ADV3/mmcm_adv_inst" 	LOC = MMCME2_ADV_X1Y2   ;
+	
+############################################################################
+# Location Constraints                                                     #
+############################################################################
+	NET "CLK"									LOC = AC18		| IOSTANDARD = LVCMOS18 ;
+	NET "RSTN"									LOC = W13		| IOSTANDARD = LVCMOS18 ;
+
+	NET "SEGLED_CLK"							LOC = M24		| IOSTANDARD = LVCMOS33 ;
+	NET "SEGLED_CLR"							LOC = M20       | IOSTANDARD = LVCMOS33 ;
+	NET "SEGLED_DO"								LOC = L24       | IOSTANDARD = LVCMOS33 ;      
+	NET "SEGLED_PEN"							LOC = R18       | IOSTANDARD = LVCMOS33 ;      
+
+	NET "LED_CLK"								LOC = N26     	| IOSTANDARD = LVCMOS33 ;
+	NET "LED_CLR"								LOC = N24       | IOSTANDARD = LVCMOS33 ;
+	NET "LED_DO"								LOC = M26       | IOSTANDARD = LVCMOS33 ;     
+	NET "LED_PEN"								LOC = P18       | IOSTANDARD = LVCMOS33 ;     
+
+	NET "TRI_LED0_B"							LOC = V22		| IOSTANDARD = LVCMOS33 ;
+	NET "TRI_LED0_G"							LOC = U22       | IOSTANDARD = LVCMOS33 ;
+	NET "TRI_LED0_R"							LOC = U21       | IOSTANDARD = LVCMOS33 ;
+	NET "TRI_LED1_B"							LOC = V23       | IOSTANDARD = LVCMOS33 ;
+	NET "TRI_LED1_G"							LOC = U25       | IOSTANDARD = LVCMOS33 ;
+	NET "TRI_LED1_R"							LOC = U24       | IOSTANDARD = LVCMOS33 ;
+
+	NET "BTN_X0" 								LOC = V17    	| IOSTANDARD = LVCMOS18 ;
+	NET "BTN_X1" 								LOC = W18    	| IOSTANDARD = LVCMOS18 ;
+	NET "BTN_X2" 								LOC = W19       | IOSTANDARD = LVCMOS18 ;
+	NET "BTN_X3" 								LOC = W15       | IOSTANDARD = LVCMOS18 ;
+	NET "BTN_X4" 								LOC = W16       | IOSTANDARD = LVCMOS18 ;
+	NET "BTN_Y1" 								LOC = V18       | IOSTANDARD = LVCMOS18 ;
+	NET "BTN_Y2" 								LOC = V19       | IOSTANDARD = LVCMOS18 ;
+	NET "BTN_Y3" 								LOC = V14       | IOSTANDARD = LVCMOS18 ;
+	NET "BTN_Y4" 								LOC = W14       | IOSTANDARD = LVCMOS18 ;
+
+	NET "SW[0]"									LOC = AA10   	| IOSTANDARD = LVCMOS15 ;
+	NET "SW[1]"									LOC = AB10      | IOSTANDARD = LVCMOS15 ;
+	NET "SW[2]"									LOC = AA13      | IOSTANDARD = LVCMOS15 ;
+	NET "SW[3]"									LOC = AA12      | IOSTANDARD = LVCMOS15 ;
+	NET "SW[4]"									LOC = Y13       | IOSTANDARD = LVCMOS15 ;
+	NET "SW[5]"									LOC = Y12       | IOSTANDARD = LVCMOS15 ;
+	NET "SW[6]"									LOC = AD11      | IOSTANDARD = LVCMOS15 ;
+	NET "SW[7]"									LOC = AD10      | IOSTANDARD = LVCMOS15 ;
+	NET "SW[8]"									LOC = AE10      | IOSTANDARD = LVCMOS15 ;
+	NET "SW[9]"									LOC = AE12      | IOSTANDARD = LVCMOS15 ;
+	NET "SW[10]"								LOC = AF12      | IOSTANDARD = LVCMOS15 ;
+	NET "SW[11]"								LOC = AE8       | IOSTANDARD = LVCMOS15 ;
+	NET "SW[12]"								LOC = AF8       | IOSTANDARD = LVCMOS15 ;
+	NET "SW[13]"								LOC = AE13      | IOSTANDARD = LVCMOS15 ;
+	NET "SW[14]"								LOC = AF13      | IOSTANDARD = LVCMOS15 ;
+	NET "SW[15]"								LOC = AF10      | IOSTANDARD = LVCMOS15 ;
+
+	NET "SD_CD"									LOC = AE26      | IOSTANDARD = LVCMOS33 ;
+	NET "SD_CMD"								LOC = AD25      | IOSTANDARD = LVCMOS33 ;
+	NET "SD_DAT[0]"								LOC = AE25      | IOSTANDARD = LVCMOS33 ;
+	NET "SD_DAT[1]"								LOC = AE22      | IOSTANDARD = LVCMOS33 ;
+	NET "SD_DAT[2]"								LOC = AF22      | IOSTANDARD = LVCMOS33 ;
+	NET "SD_DAT[3]"								LOC = Y20       | IOSTANDARD = LVCMOS33 ;
+	NET "SD_RESET"								LOC = AE23      | IOSTANDARD = LVCMOS33 ;
+	NET "SD_SCK"								LOC = AF23      | IOSTANDARD = LVCMOS33 ;
+
+	
+	NET "AUD_PWM"								LOC = P26       | IOSTANDARD = LVCMOS33 ;
+	NET "AUD_SD"								LOC = M25       | IOSTANDARD = LVCMOS33 ;
+	NET "MIC_CLK"								LOC = Y16 		| IOSTANDARD = LVCMOS18 ;
+	NET "MIC_DAT"								LOC = Y15       | IOSTANDARD = LVCMOS18 ;
+	NET "MIC_SEL"								LOC = AB14      | IOSTANDARD = LVCMOS18 ;
+
+
+	NET "BPI_A[0]"								LOC = C12       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_A[1]"								LOC = J11       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_A[2]"								LOC = H13       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_A[3]"								LOC = H12       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_A[4]"								LOC = J13       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_A[5]"								LOC = H11       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_A[6]"								LOC = J10       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_A[7]"								LOC = J8        | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_A[8]"								LOC = F9        | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_A[9]"								LOC = F8        | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_A[10]"								LOC = E10       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_A[11]"								LOC = F10       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_A[12]"								LOC = D9        | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_A[13]"								LOC = D8        | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_A[14]"								LOC = G14       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_A[15]"								LOC = H14       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_A[16]"								LOC = B9        | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_A[17]"								LOC = G11       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_A[18]"								LOC = H9        | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_A[19]"								LOC = G12       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_A[20]"								LOC = F12       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_A[21]"								LOC = H8        | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_A[22]"								LOC = A8        | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_A[23]"								LOC = C9        | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_A[24]"								LOC = D10       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_A[25]"								LOC = A9        | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_CEN[0]" 							LOC = D11       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+ 	NET "BPI_CEN[1]"							LOC = F14		| IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_Q[0]"								LOC = D14       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_Q[1]"								LOC = D13       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_Q[2]"								LOC = E13       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_Q[3]"								LOC = E12       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_Q[4]"								LOC = C14       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_Q[5]"								LOC = C13       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_Q[6]"								LOC = B12       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_Q[7]"								LOC = B11       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_Q[8]"								LOC = B14       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_Q[9]"								LOC = A14       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_Q[10]"								LOC = B10       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_Q[11]"								LOC = A10       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_Q[12]"								LOC = B15       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_Q[13]"								LOC = A15       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_Q[14]"								LOC = A13       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_Q[15]"								LOC = A12       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+ 	NET "BPI_Q[16]"								LOC = J14       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+ 	NET "BPI_Q[17]"								LOC = J25       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+ 	NET "BPI_Q[18]"								LOC = C18       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+ 	NET "BPI_Q[19]"								LOC = J23       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+ 	NET "BPI_Q[20]"								LOC = K23       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+ 	NET "BPI_Q[21]"								LOC = B17       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+ 	NET "BPI_Q[22]"								LOC = L22       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+ 	NET "BPI_Q[23]"								LOC = D15       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+ 	NET "BPI_Q[24]"								LOC = H22       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+ 	NET "BPI_Q[25]"								LOC = K15       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+ 	NET "BPI_Q[26]"								LOC = J24       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+ 	NET "BPI_Q[27]"								LOC = K22       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+ 	NET "BPI_Q[28]"								LOC = C17       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+ 	NET "BPI_Q[29]"								LOC = D16       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+ 	NET "BPI_Q[30]"								LOC = A17       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+ 	NET "BPI_Q[31]"								LOC = L23       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_OEN"								LOC = F13       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_RSTN"								LOC = G9        | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_RYNBY[0]" 							LOC = C11       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_RYNBY[1]"							LOC = E11       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "BPI_WEN"								LOC = G10       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+
+	NET "FPGA_SDA_L"							LOC = K25       | IOSTANDARD = LVCMOS33 ;
+	NET "FPGA_SCL_L"							LOC = N16       | IOSTANDARD = LVCMOS33 ;
+	NET "OT"            						LOC = P20       | IOSTANDARD = LVCMOS33 ;
+
+	NET "JA_O[1]"								LOC = W26   	| IOSTANDARD = LVCMOS33 ;
+	NET "JA_O[2]"								LOC = V21       | IOSTANDARD = LVCMOS33 ;
+	NET "JA_O[3]"								LOC = W21       | IOSTANDARD = LVCMOS33 ;
+	NET "JA_O[4]"								LOC = AA25      | IOSTANDARD = LVCMOS33 ;
+	NET "JA_I[1]"								LOC = AB25      | IOSTANDARD = LVCMOS33 ;
+	NET "JA_I[2]"								LOC = W23       | IOSTANDARD = LVCMOS33 ;
+	NET "JA_I[3]"								LOC = W24       | IOSTANDARD = LVCMOS33 ;
+	NET "JA_I[4]"								LOC = AB26      | IOSTANDARD = LVCMOS33 ;
+	NET "JB_O[1]"								LOC = AC26      | IOSTANDARD = LVCMOS33 ;
+	NET "JB_O[2]"								LOC = Y25       | IOSTANDARD = LVCMOS33 ;
+	NET "JB_O[3]"								LOC = Y26       | IOSTANDARD = LVCMOS33 ;
+	NET "JB_O[4]"								LOC = AA23      | IOSTANDARD = LVCMOS33 ;
+	NET "JB_I[1]"								LOC = AB24      | IOSTANDARD = LVCMOS33 ;
+	NET "JB_I[2]"								LOC = Y23       | IOSTANDARD = LVCMOS33 ;
+	NET "JB_I[3]"								LOC = AA24      | IOSTANDARD = LVCMOS33 ;
+	NET "JB_I[4]"								LOC = Y22       | IOSTANDARD = LVCMOS33 ;
+	NET "JC_O[1]"								LOC = AA22      | IOSTANDARD = LVCMOS33 ;
+	NET "JC_O[2]"								LOC = AC23      | IOSTANDARD = LVCMOS33 ;
+	NET "JC_O[3]"								LOC = AC24      | IOSTANDARD = LVCMOS33 ;
+	NET "JC_O[4]"								LOC = W20       | IOSTANDARD = LVCMOS33 ;
+	NET "JC_I[1]"								LOC = Y21       | IOSTANDARD = LVCMOS33 ;
+	NET "JC_I[2]"								LOC = AD23      | IOSTANDARD = LVCMOS33 ;
+	NET "JC_I[3]"								LOC = AD24      | IOSTANDARD = LVCMOS33 ;
+	NET "JC_I[4]"								LOC = AB22      | IOSTANDARD = LVCMOS33 ;
+	NET "JD_O[1]"								LOC = AC22      | IOSTANDARD = LVCMOS33 ;
+	NET "JD_O[2]"								LOC = AB21      | IOSTANDARD = LVCMOS33 ;
+	NET "JD_O[3]"								LOC = AC21      | IOSTANDARD = LVCMOS33 ;
+	NET "JD_O[4]"								LOC = AD21      | IOSTANDARD = LVCMOS33 ;
+	NET "JD_I[1]"								LOC = AE21      | IOSTANDARD = LVCMOS33 ;
+	NET "JD_I[2]"								LOC = AF24      | IOSTANDARD = LVCMOS33 ;
+	NET "JD_I[3]"								LOC = AF25      | IOSTANDARD = LVCMOS33 ;
+	NET "JD_I[4]"								LOC = AD26      | IOSTANDARD = LVCMOS33 ;
+	NET "JE_O[1]"								LOC = C16       | IOSTANDARD = LVCMOS33 ;
+	NET "JE_O[2]"								LOC = C19       | IOSTANDARD = LVCMOS33 ;
+	NET "JE_O[3]"								LOC = A18       | IOSTANDARD = LVCMOS33 ;
+	NET "JE_O[4]"								LOC = H16       | IOSTANDARD = LVCMOS33 ;
+	NET "JE_I[1]"								LOC = B16       | IOSTANDARD = LVCMOS33 ;
+	NET "JE_I[2]"								LOC = B19       | IOSTANDARD = LVCMOS33 ;
+	NET "JE_I[3]"								LOC = A19       | IOSTANDARD = LVCMOS33 ;
+	NET "JE_I[4]"								LOC = G16       | IOSTANDARD = LVCMOS33 ;
+
+					 
+
+
+	NET "SRAM_ADDR[0]"							LOC = D20		| IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_ADDR[1]"							LOC = D18       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_ADDR[2]"							LOC = E16       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_ADDR[3]"							LOC = E18       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_ADDR[4]"							LOC = E17       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_ADDR[5]"							LOC = E20       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_ADDR[6]"							LOC = F15       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_ADDR[7]"							LOC = F18       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_ADDR[8]"							LOC = H19       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_ADDR[9]"							LOC = J16       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_ADDR[10]"							LOC = J18       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_ADDR[11]"							LOC = J20       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_ADDR[12]"							LOC = G19       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_ADDR[13]"							LOC = H17       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_ADDR[14]"							LOC = F20       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_ADDR[15]"							LOC = G17       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_ADDR[16]"							LOC = F17       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_ADDR[17]"							LOC = F19       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_ADDR[18]"							LOC = H18       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_ADDR[19]"							LOC = G20       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ; #_G2 (-BV1XI)
+#	NET "SRAM_ADDR[19]"							LOC = K20       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ; #_H6
+	NET "SRAM_CE"								LOC = E15       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[0]"							LOC = M16		| IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[1]"							LOC = L19       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[2]"							LOC = L17       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[3]"							LOC = K18       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[4]"							LOC = L18       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[5]"							LOC = K17       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[6]"							LOC = K16       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[7]"							LOC = M17       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[8]"							LOC = H26       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[9]"							LOC = H23       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[10]"							LOC = H21       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[11]"							LOC = J26       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[12]"							LOC = L20       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[13]"							LOC = J19       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[14]"							LOC = J21       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[15]"							LOC = K21       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[16]"							LOC = B26       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[17]"							LOC = C22       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[18]"							LOC = A24       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[19]"							LOC = A23       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[20]"							LOC = E22       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[21]"							LOC = E23       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[22]"							LOC = C24       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[23]"							LOC = D23       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[24]"							LOC = B20       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[25]"							LOC = A20       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[26]"							LOC = C21       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[27]"							LOC = B21       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[28]"							LOC = A22       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[29]"							LOC = B22       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[30]"							LOC = D21       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[31]"							LOC = E21       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[32]"							LOC = H24       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[33]"							LOC = E26       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[34]"							LOC = G25       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[35]"							LOC = F24       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[36]"							LOC = F25       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[37]"							LOC = G24       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[38]"							LOC = G21       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[39]"							LOC = G26       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[40]"							LOC = F22       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[41]"							LOC = G22       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[42]"							LOC = C26       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[43]"							LOC = D24       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[44]"							LOC = E25       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[45]"							LOC = F23       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[46]"							LOC = D25       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_DQ[47]"							LOC = D26       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_OEN"								LOC = D19      	| IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+	NET "SRAM_WEN"								LOC = J15       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 4 ;
+
+
+    NET "TMDS_RX_SCL"							LOC = V24      	| IOSTANDARD = LVCMOS33 ;
+    NET "TMDS_RX_SDA"							LOC = U26      	| IOSTANDARD = LVCMOS33 ;
+    NET "TMDS_RXD_N[2]"							LOC = AF20   	| IOSTANDARD = LVDS ;
+    NET "TMDS_RXD_P[2]"							LOC = AF19  	| IOSTANDARD = LVDS ;
+    NET "TMDS_RXD_N[1]"							LOC = AE16   	| IOSTANDARD = LVDS ;
+    NET "TMDS_RXD_P[1]"							LOC = AD16   	| IOSTANDARD = LVDS ;
+    NET "TMDS_RXD_N[0]"							LOC = AA15   	| IOSTANDARD = LVDS ;
+    NET "TMDS_RXD_P[0]"							LOC = AA14   	| IOSTANDARD = LVDS ;
+    NET "TMDS_RXC_N"							LOC = AA18      | IOSTANDARD = LVDS ;
+    NET "TMDS_RXC_P"							LOC = AA17      | IOSTANDARD = LVDS ;
+    NET "TMDS_TX_SCL"							LOC = V26       | IOSTANDARD = LVCMOS33 ;
+    NET "TMDS_TX_SDA"							LOC = W25       | IOSTANDARD = LVCMOS33 ;
+    NET "TMDS_TXC_N"							LOC = AE15		| IOSTANDARD = LVDS ;
+    NET "TMDS_TXC_P"							LOC = AD15      | IOSTANDARD = LVDS ;
+    NET "TMDS_TXD_N[0]"							LOC = AF18		| IOSTANDARD = LVDS ;
+    NET "TMDS_TXD_P[0]"							LOC = AE18      | IOSTANDARD = LVDS ;
+    NET "TMDS_TXD_N[1]"							LOC = AF15		| IOSTANDARD = LVDS ;
+    NET "TMDS_TXD_P[1]"							LOC = AF14      | IOSTANDARD = LVDS ;
+    NET "TMDS_TXD_N[2]"							LOC = AF17    	| IOSTANDARD = LVDS ;
+    NET "TMDS_TXD_P[2]"							LOC = AE17      | IOSTANDARD = LVDS ;
+
+	NET "UART_RXD"								LOC = L25     	| IOSTANDARD = LVCMOS33 | SLEW = FAST |              PULLUP ;
+	NET "UART_TXD"								LOC = P24       | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 16 | PULLUP ;
+
+	NET "PS2_DATA"								LOC = N18     	| IOSTANDARD = LVCMOS33 | SLEW = FAST |              PULLUP ;
+	NET "PS2_CLK"								LOC = M19       | IOSTANDARD = LVCMOS33 | SLEW = FAST |              PULLUP ;
+
+	NET "VGA_B[0]"								LOC = T20		| IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "VGA_B[1]"								LOC = R20       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "VGA_B[2]"								LOC = T22       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "VGA_B[3]"								LOC = T23       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "VGA_G[0]"								LOC = R22       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "VGA_G[1]"								LOC = R23       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "VGA_G[2]"								LOC = T24       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "VGA_G[3]"								LOC = T25       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "VGA_R[0]"								LOC = N21       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "VGA_R[1]"								LOC = N22       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "VGA_R[2]"								LOC = R21       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "VGA_R[3]"								LOC = P21       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "HS"									LOC = M22       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+	NET "VS"									LOC = M21       | IOSTANDARD = LVCMOS33 | SLEW = FAST ;
+
+##################################################################################################
+## Controller 0
+## Memory Device: DDR3_SDRAM->Components->MT41J128M16XX-125
+## Data Width: 32
+## Time Period: 1250
+## Data Mask: 1
+##################################################################################################
+
+NET "s_MIG_SYS_CLK" 	TNM_NET = TM_MIG_CLK;
+TIMESPEC "TS_MIG_CLK" 		    = PERIOD "TM_MIG_CLK" 5 ns ;
+
+############## NET - IOSTANDARD ##################
+
+NET   "DDR3_DQ[0]"                             	LOC = "U2"      |   IOSTANDARD = SSTL15_T_DCI         |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L2P_T0_34
+NET   "DDR3_DQ[1]"                             	LOC = "U7"      |   IOSTANDARD = SSTL15_T_DCI         |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L5P_T0_34
+NET   "DDR3_DQ[2]"                             	LOC = "U6"      |   IOSTANDARD = SSTL15_T_DCI         |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L1P_T0_34
+NET   "DDR3_DQ[3]"                             	LOC = "V4"      |   IOSTANDARD = SSTL15_T_DCI         |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L6P_T0_34
+NET   "DDR3_DQ[4]"                             	LOC = "V6"      |   IOSTANDARD = SSTL15_T_DCI         |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L5N_T0_34
+NET   "DDR3_DQ[5]"                             	LOC = "W3"      |   IOSTANDARD = SSTL15_T_DCI         |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L4N_T0_34
+NET   "DDR3_DQ[6]"                             	LOC = "U5"      |   IOSTANDARD = SSTL15_T_DCI         |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L1N_T0_34
+NET   "DDR3_DQ[7]"                             	LOC = "U1"      |   IOSTANDARD = SSTL15_T_DCI         |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L2N_T0_34
+NET   "DDR3_DQ[8]"                             	LOC = "AA2"     |   IOSTANDARD = SSTL15_T_DCI         |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L12N_T1_MRCC_34
+NET   "DDR3_DQ[9]"                             	LOC = "Y2"      |   IOSTANDARD = SSTL15_T_DCI         |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L7N_T1_34
+NET   "DDR3_DQ[10]"                            	LOC = "AC2"     |   IOSTANDARD = SSTL15_T_DCI         |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L11N_T1_SRCC_34
+NET   "DDR3_DQ[11]"                            	LOC = "Y1"      |   IOSTANDARD = SSTL15_T_DCI         |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L10N_T1_34
+NET   "DDR3_DQ[12]"                            	LOC = "AA3"     |   IOSTANDARD = SSTL15_T_DCI         |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L12P_T1_MRCC_34
+NET   "DDR3_DQ[13]"                            	LOC = "V1"      |   IOSTANDARD = SSTL15_T_DCI         |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L8N_T1_34
+NET   "DDR3_DQ[14]"                            	LOC = "AB2"     |   IOSTANDARD = SSTL15_T_DCI         |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L11P_T1_SRCC_34
+NET   "DDR3_DQ[15]"                            	LOC = "W1"      |   IOSTANDARD = SSTL15_T_DCI         |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L10P_T1_34
+NET   "DDR3_DQ[16]"                            	LOC = "AA4"     |   IOSTANDARD = SSTL15_T_DCI         |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L13P_T2_MRCC_34
+NET   "DDR3_DQ[17]"                            	LOC = "AC3"     |   IOSTANDARD = SSTL15_T_DCI         |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L14N_T2_SRCC_34
+NET   "DDR3_DQ[18]"                            	LOC = "Y5"      |   IOSTANDARD = SSTL15_T_DCI         |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L17N_T2_34
+NET   "DDR3_DQ[19]"                            	LOC = "AC6"     |   IOSTANDARD = SSTL15_T_DCI         |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L16N_T2_34
+NET   "DDR3_DQ[20]"                            	LOC = "Y6"      |   IOSTANDARD = SSTL15_T_DCI         |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L17P_T2_34
+NET   "DDR3_DQ[21]"                            	LOC = "AD6"     |   IOSTANDARD = SSTL15_T_DCI         |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L18P_T2_34
+NET   "DDR3_DQ[22]"                            	LOC = "AB4"     |   IOSTANDARD = SSTL15_T_DCI         |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L13N_T2_MRCC_34
+NET   "DDR3_DQ[23]"                            	LOC = "AC4"     |   IOSTANDARD = SSTL15_T_DCI         |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L14P_T2_SRCC_34
+NET   "DDR3_DQ[24]"                            	LOC = "AF2"     |   IOSTANDARD = SSTL15_T_DCI         |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L24N_T3_34
+NET   "DDR3_DQ[25]"                            	LOC = "AE2"     |   IOSTANDARD = SSTL15_T_DCI         |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L22N_T3_34
+NET   "DDR3_DQ[26]"                            	LOC = "AE3"     |   IOSTANDARD = SSTL15_T_DCI         |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L22P_T3_34
+NET   "DDR3_DQ[27]"                            	LOC = "AD4"     |   IOSTANDARD = SSTL15_T_DCI         |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L19P_T3_34
+NET   "DDR3_DQ[28]"                            	LOC = "AE6"     |   IOSTANDARD = SSTL15_T_DCI         |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L23P_T3_34
+NET   "DDR3_DQ[29]"                            	LOC = "AE1"     |   IOSTANDARD = SSTL15_T_DCI         |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L20N_T3_34
+NET   "DDR3_DQ[30]"                            	LOC = "AF3"     |   IOSTANDARD = SSTL15_T_DCI         |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L24P_T3_34
+NET   "DDR3_DQ[31]"                            	LOC = "AE5"     |   IOSTANDARD = SSTL15_T_DCI         |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L23N_T3_34
+NET   "DDR3_A[13]"                          	LOC = "AC13"    |   IOSTANDARD = SSTL15               |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L17P_T2_33
+NET   "DDR3_A[12]"                          	LOC = "AB9"     |   IOSTANDARD = SSTL15               |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L11N_T1_SRCC_33
+NET   "DDR3_A[11]"                          	LOC = "W11"     |   IOSTANDARD = SSTL15               |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L1N_T0_33
+NET   "DDR3_A[10]"                          	LOC = "AB7"     |   IOSTANDARD = SSTL15               |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L10P_T1_33
+NET   "DDR3_A[9]"                           	LOC = "AD13"    |   IOSTANDARD = SSTL15               |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L17N_T2_33
+NET   "DDR3_A[8]"                           	LOC = "Y11"     |   IOSTANDARD = SSTL15               |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L5P_T0_33
+NET   "DDR3_A[7]"                           	LOC = "V11"     |   IOSTANDARD = SSTL15               |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L1P_T0_33
+NET   "DDR3_A[6]"                           	LOC = "AB12"    |   IOSTANDARD = SSTL15               |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L15P_T2_DQS_33
+NET   "DDR3_A[5]"                           	LOC = "AC12"    |   IOSTANDARD = SSTL15               |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L15N_T2_DQS_33
+NET   "DDR3_A[4]"                           	LOC = "V9"      |   IOSTANDARD = SSTL15               |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L6P_T0_33
+NET   "DDR3_A[3]"                           	LOC = "Y10"     |   IOSTANDARD = SSTL15               |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L5N_T0_33
+NET   "DDR3_A[2]"                           	LOC = "W9"      |   IOSTANDARD = SSTL15               |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L3N_T0_DQS_33
+NET   "DDR3_A[1]"                           	LOC = "AA7"     |   IOSTANDARD = SSTL15               |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L8N_T1_33
+NET   "DDR3_A[0]"                           	LOC = "AA9"     |   IOSTANDARD = SSTL15               |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L11P_T1_SRCC_33
+NET   "DDR3_BA[2]"                             	LOC = "AA8"     |   IOSTANDARD = SSTL15               |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L8P_T1_33
+NET   "DDR3_BA[1]"                             	LOC = "Y8"      |   IOSTANDARD = SSTL15               |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L4P_T0_33
+NET   "DDR3_BA[0]"                             	LOC = "V8"      |   IOSTANDARD = SSTL15               |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L2P_T0_33
+NET   "DDR3_RAS_N"                             	LOC = "Y7"      |   IOSTANDARD = SSTL15               |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L4N_T0_33
+NET   "DDR3_CAS_N"                             	LOC = "AC7"     |   IOSTANDARD = SSTL15               |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L10N_T1_33
+NET   "DDR3_WE_N"                              	LOC = "AD9"     |   IOSTANDARD = SSTL15               |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L12N_T1_MRCC_33
+NET   "DDR3_RST_N"                          	LOC = "V2"      |   IOSTANDARD = LVCMOS15             |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L8P_T1_34
+NET   "DDR3_CKE"                            	LOC = "V7"      |   IOSTANDARD = SSTL15               |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L2N_T0_33
+NET   "DDR3_ODT"                            	LOC = "AC9"     |   IOSTANDARD = SSTL15               |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L12P_T1_MRCC_33
+NET   "DDR3_CS_N"                           	LOC = "AD8"     |   IOSTANDARD = SSTL15               |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L9N_T1_DQS_33
+NET   "DDR3_DM[0]"                             	LOC = "V3"      |   IOSTANDARD = SSTL15               |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L4P_T0_34
+NET   "DDR3_DM[1]"                             	LOC = "Y3"      |   IOSTANDARD = SSTL15               |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L7P_T1_34
+NET   "DDR3_DM[2]"                             	LOC = "AB6"     |   IOSTANDARD = SSTL15               |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L16P_T2_34
+NET   "DDR3_DM[3]"                             	LOC = "AD1"     |   IOSTANDARD = SSTL15               |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L20P_T3_34
+NET   "DDR3_DQS[0]"                         	LOC = "W6"      |   IOSTANDARD = DIFF_SSTL15_T_DCI    |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L3P_T0_DQS_34
+NET   "DDR3_DQS_N[0]"                          	LOC = "W5"      |   IOSTANDARD = DIFF_SSTL15_T_DCI    |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L3N_T0_DQS_34
+NET   "DDR3_DQS[1]"                          	LOC = "AB1"     |   IOSTANDARD = DIFF_SSTL15_T_DCI    |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L9P_T1_DQS_34
+NET   "DDR3_DQS_N[1]"                          	LOC = "AC1"     |   IOSTANDARD = DIFF_SSTL15_T_DCI    |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L9N_T1_DQS_34
+NET   "DDR3_DQS[2]"                          	LOC = "AA5"     |   IOSTANDARD = DIFF_SSTL15_T_DCI    |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L15P_T2_DQS_34
+NET   "DDR3_DQS_N[2]"                          	LOC = "AB5"     |   IOSTANDARD = DIFF_SSTL15_T_DCI    |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L15N_T2_DQS_34
+NET   "DDR3_DQS[3]"                          	LOC = "AF5"     |   IOSTANDARD = DIFF_SSTL15_T_DCI    |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L21P_T3_DQS_34
+NET   "DDR3_DQS_N[3]"                          	LOC = "AF4"     |   IOSTANDARD = DIFF_SSTL15_T_DCI    |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L21N_T3_DQS_34
+NET   "DDR3_CK"                           		LOC = "AE7"     |   IOSTANDARD = DIFF_SSTL15          |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L7P_T1_33
+NET   "DDR3_CK_N"                           	LOC = "AF7"     |   IOSTANDARD = DIFF_SSTL15          |     VCCAUX_IO = HIGH      |     SLEW = FAST        ; # Pad function: IO_L7N_T1_33
+
+INST "*/ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/phaser_out" LOC=PHASER_OUT_PHY_X1Y7;
+INST "*/ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/phaser_out" LOC=PHASER_OUT_PHY_X1Y6;
+INST "*/ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/phaser_out" LOC=PHASER_OUT_PHY_X1Y5;
+INST "*/ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/phaser_out" LOC=PHASER_OUT_PHY_X1Y11;
+INST "*/ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/phaser_out" LOC=PHASER_OUT_PHY_X1Y10;
+INST "*/ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/phaser_out" LOC=PHASER_OUT_PHY_X1Y9;
+INST "*/ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_A.ddr_byte_lane_A/phaser_out" LOC=PHASER_OUT_PHY_X1Y8;
+
+INST "*/ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/phaser_in_gen.phaser_in" LOC=PHASER_IN_PHY_X1Y11;
+INST "*/ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/phaser_in_gen.phaser_in" LOC=PHASER_IN_PHY_X1Y10;
+INST "*/ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/phaser_in_gen.phaser_in" LOC=PHASER_IN_PHY_X1Y9;
+INST "*/ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_A.ddr_byte_lane_A/phaser_in_gen.phaser_in" LOC=PHASER_IN_PHY_X1Y8;
+
+INST "*/ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/out_fifo" LOC=OUT_FIFO_X1Y7;
+INST "*/ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/out_fifo" LOC=OUT_FIFO_X1Y6;
+INST "*/ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/out_fifo" LOC=OUT_FIFO_X1Y5;
+INST "*/ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/out_fifo" LOC=OUT_FIFO_X1Y11;
+INST "*/ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/out_fifo" LOC=OUT_FIFO_X1Y10;
+INST "*/ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/out_fifo" LOC=OUT_FIFO_X1Y9;
+INST "*/ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_A.ddr_byte_lane_A/out_fifo" LOC=OUT_FIFO_X1Y8;
+
+INST "*/ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/in_fifo_gen.in_fifo" LOC=IN_FIFO_X1Y11;
+INST "*/ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/in_fifo_gen.in_fifo" LOC=IN_FIFO_X1Y10;
+INST "*/ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/in_fifo_gen.in_fifo" LOC=IN_FIFO_X1Y9;
+INST "*/ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_A.ddr_byte_lane_A/in_fifo_gen.in_fifo" LOC=IN_FIFO_X1Y8;
+
+INST "*/ddr_phy_4lanes_1.u_ddr_phy_4lanes/phy_control_i" LOC=PHY_CONTROL_X1Y1;
+INST "*/ddr_phy_4lanes_0.u_ddr_phy_4lanes/phy_control_i" LOC=PHY_CONTROL_X1Y2;
+
+INST "*/ddr_phy_4lanes_1.u_ddr_phy_4lanes/phaser_ref_i" LOC=PHASER_REF_X1Y1;
+INST "*/ddr_phy_4lanes_0.u_ddr_phy_4lanes/phaser_ref_i" LOC=PHASER_REF_X1Y2;
+
+INST "*/ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/ddr_byte_group_io/*slave_ts" LOC=OLOGIC_X1Y143;
+INST "*/ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/ddr_byte_group_io/*slave_ts" LOC=OLOGIC_X1Y131;
+INST "*/ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/ddr_byte_group_io/*slave_ts" LOC=OLOGIC_X1Y119;
+INST "*/ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_A.ddr_byte_lane_A/ddr_byte_group_io/*slave_ts" LOC=OLOGIC_X1Y107;
+
+INST "*/u_ddr3_infrastructure/plle2_i" LOC=PLLE2_ADV_X1Y1;
+INST "*/u_ddr3_infrastructure/gen_mmcm.mmcm_i" LOC=MMCME2_ADV_X1Y1;
+
+NET "*/iserdes_clk" TNM_NET = "TNM_ISERDES_CLK";
+INST "*/mc0/mc_read_idle_r" TNM = "TNM_SOURCE_IDLE";
+INST "*/input_[?].iserdes_dq_.iserdesdq" TNM = "TNM_DEST_ISERDES";
+TIMESPEC "TS_ISERDES_CLOCK" = PERIOD "TNM_ISERDES_CLK" 1250 ps;
+TIMESPEC TS_MULTICYCLEPATH = FROM "TNM_SOURCE_IDLE" TO "TNM_DEST_ISERDES" TS_ISERDES_CLOCK*6;
+
+INST "*/device_temp_sync_r1*" TNM="TNM_MULTICYCLEPATH_DEVICE_TEMP_SYNC";
+TIMESPEC "TS_MULTICYCLEPATH_DEVICE_TEMP_SYNC" = TO "TNM_MULTICYCLEPATH_DEVICE_TEMP_SYNC" 20 ns DATAPATHONLY;
+##################################################################################################
+#-------------------------------------------------------------------------------------
+# JTAG interface Constraints 
+#-------------------------------------------------------------------------------------
+TIMESPEC TS_J_CLK = PERIOD J_CLK 30 ns ;
+TIMESPEC TS_J_TO_D = FROM J_CLK TO D_CLK TIG ;
+TIMESPEC TS_D_TO_J = FROM D_CLK TO J_CLK TIG ;
+NET "U_CHIPSCOPE_IBERT/U0/U_IBERT_CORE/U_GTCPX_X0Y0/gt_txoutclk" TNM_NET = D_CLK ;
+
+#-------------------------------------------------------------------------------------
+# GT Clock Constraints 
+#-------------------------------------------------------------------------------------
+# Input REFCLK constratins
+# QUAD 0
+NET "Q0_CLK0_MGTREFCLK_P_IPAD" TNM_NET = "TNM_GT_QUAD_CLK_0_0";
+TIMESPEC "TS_GT_QUAD_CLK_0_0" = PERIOD "TNM_GT_QUAD_CLK_0_0" 8.0 ns;
+
+# GT PLL output constraints
+# GT X0Y0
+NET U_CHIPSCOPE_IBERT/U0/U_IBERT_CORE/U_GTCPX_X0Y0/gt_rxoutclk TNM_NET = "TNM_X0Y0_RXOUTCLK";
+TIMESPEC "TS_X0Y0_RXOUTCLK" = PERIOD "TNM_X0Y0_RXOUTCLK" 12.8 ns;
+NET U_CHIPSCOPE_IBERT/U0/U_IBERT_CORE/U_GTCPX_X0Y0/gt_txoutclk TNM_NET = "TNM_X0Y0_TXOUTCLK";
+TIMESPEC "TS_X0Y0_TXOUTCLK" = PERIOD "TNM_X0Y0_TXOUTCLK" 12.8 ns;
+# GT X0Y1
+NET U_CHIPSCOPE_IBERT/U0/U_IBERT_CORE/U_GTCPX_X0Y1/gt_rxoutclk TNM_NET = "TNM_X0Y1_RXOUTCLK";
+TIMESPEC "TS_X0Y1_RXOUTCLK" = PERIOD "TNM_X0Y1_RXOUTCLK" 12.8 ns;
+NET U_CHIPSCOPE_IBERT/U0/U_IBERT_CORE/U_GTCPX_X0Y1/gt_txoutclk TNM_NET = "TNM_X0Y1_TXOUTCLK";
+TIMESPEC "TS_X0Y1_TXOUTCLK" = PERIOD "TNM_X0Y1_TXOUTCLK" 12.8 ns;
+# GT X0Y2
+NET U_CHIPSCOPE_IBERT/U0/U_IBERT_CORE/U_GTCPX_X0Y2/gt_rxoutclk TNM_NET = "TNM_X0Y2_RXOUTCLK";
+TIMESPEC "TS_X0Y2_RXOUTCLK" = PERIOD "TNM_X0Y2_RXOUTCLK" 12.8 ns;
+NET U_CHIPSCOPE_IBERT/U0/U_IBERT_CORE/U_GTCPX_X0Y2/gt_txoutclk TNM_NET = "TNM_X0Y2_TXOUTCLK";
+TIMESPEC "TS_X0Y2_TXOUTCLK" = PERIOD "TNM_X0Y2_TXOUTCLK" 12.8 ns;
+# GT X0Y3
+NET U_CHIPSCOPE_IBERT/U0/U_IBERT_CORE/U_GTCPX_X0Y3/gt_rxoutclk TNM_NET = "TNM_X0Y3_RXOUTCLK";
+TIMESPEC "TS_X0Y3_RXOUTCLK" = PERIOD "TNM_X0Y3_RXOUTCLK" 12.8 ns;
+NET U_CHIPSCOPE_IBERT/U0/U_IBERT_CORE/U_GTCPX_X0Y3/gt_txoutclk TNM_NET = "TNM_X0Y3_TXOUTCLK";
+TIMESPEC "TS_X0Y3_TXOUTCLK" = PERIOD "TNM_X0Y3_TXOUTCLK" 12.8 ns;
+
+#-------------------------------------------------------------------------------------
+# GT LOC constraint 
+#-------------------------------------------------------------------------------------
+INST U_CHIPSCOPE_IBERT/U0/U_IBERT_CORE/U_GTCPX_X0Y0/U_GT_CHANNEL_X0Y0/gtxe2_i_x0y0 LOC=GTXE2_CHANNEL_X0Y0;
+INST U_CHIPSCOPE_IBERT/U0/U_IBERT_CORE/U_GTCPX_X0Y1/U_GT_CHANNEL_X0Y1/gtxe2_i_x0y1 LOC=GTXE2_CHANNEL_X0Y1;
+INST U_CHIPSCOPE_IBERT/U0/U_IBERT_CORE/U_GTCPX_X0Y2/U_GT_CHANNEL_X0Y2/gtxe2_i_x0y2 LOC=GTXE2_CHANNEL_X0Y2;
+INST U_CHIPSCOPE_IBERT/U0/U_IBERT_CORE/U_GTCPX_X0Y3/U_GT_CHANNEL_X0Y3/gtxe2_i_x0y3 LOC=GTXE2_CHANNEL_X0Y3;
+INST U_CHIPSCOPE_IBERT/U0/U_IBERT_CORE/U_GTCCPX_QUAD0/U_GTXE2_COMN_QUAD0/gtxe2_comm LOC=GTXE2_COMMON_X0Y0;
+#-------------------------------------------------------------------------------------
+# GT REFCLK PIN LOCs 
+#-------------------------------------------------------------------------------------
+NET Q0_CLK0_MGTREFCLK_P_IPAD LOC=H6;
+NET Q0_CLK0_MGTREFCLK_N_IPAD LOC=H5;
+#-------------------------------------------------------------------------------------
+# RXOUTCLK OUTPUT PIN LOCs (if enabled) 
+#-------------------------------------------------------------------------------------
+NET "SFP1_TX_DISABLE"		LOC = "T19"   	| IOSTANDARD = "LVCMOS33"	;
+NET "SFP2_TX_DISABLE"		LOC = "R17"   	| IOSTANDARD = "LVCMOS33"	;
+
+##################################################################################################
+	NET "ETH_PHY_MDC"		LOC = AC14    	| IOSTANDARD = LVCMOS18 | DRIVE = 8 | SLEW = FAST;  
+	NET "ETH_PHY_MDIO"		LOC = AD14      | IOSTANDARD = LVCMOS18 | DRIVE = 8 | SLEW = FAST;  
+	NET "ETH_PHY_RST_N"		LOC = N23       | IOSTANDARD = LVCMOS33 | DRIVE = 8 ;  
+ 	NET "ETH_RXC"			LOC = AB17      | IOSTANDARD = LVCMOS18 | DRIVE = 8 ;   
+	NET "ETH_RX_EN"			LOC = AC17      | IOSTANDARD = LVCMOS18 | DRIVE = 8 ;  
+	NET "ETH_RXD[0]"		LOC = AD20      | IOSTANDARD = LVCMOS18 | DRIVE = 8 ;   
+	NET "ETH_RXD[1]"		LOC = AE20      | IOSTANDARD = LVCMOS18 | DRIVE = 8 ;   
+	NET "ETH_RXD[2]"		LOC = AA19      | IOSTANDARD = LVCMOS18 | DRIVE = 8 ;   
+	NET "ETH_RXD[3]"		LOC = AA20      | IOSTANDARD = LVCMOS18 | DRIVE = 8 ;   
+	NET "ETH_TXD[0]"		LOC = AB19      | IOSTANDARD = LVCMOS18 | DRIVE = 8 | SLEW = FAST;   
+	NET "ETH_TXD[1]"		LOC = AB20      | IOSTANDARD = LVCMOS18 | DRIVE = 8 | SLEW = FAST;       
+	NET "ETH_TXD[2]"		LOC = Y17       | IOSTANDARD = LVCMOS18 | DRIVE = 8 | SLEW = FAST;       
+	NET "ETH_TXD[3]"		LOC = Y18       | IOSTANDARD = LVCMOS18 | DRIVE = 8 | SLEW = FAST;       
+	NET "ETH_TX_EN"			LOC = AD19      | IOSTANDARD = LVCMOS18 | DRIVE = 8 | SLEW = FAST;         
+	NET "ETH_TXC"			LOC = AC19      | IOSTANDARD = LVCMOS18 | DRIVE = 8 | SLEW = FAST;  
+
+############################################################################
+# End Constraints                                                          #
+############################################################################

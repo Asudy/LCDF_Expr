@@ -10,13 +10,13 @@
          <ClosedNode>/ShiftReg8b E:|wjz|Expr14|ShiftReg8b|ShiftReg8b.v</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem>ShiftReg8b (E:/wjz/Expr14/ShiftReg8b/ShiftReg8b.v)</SelectedItem>
+         <SelectedItem>ShiftReg8b (D:/Asudy/WorkSpace/LCDF_Expr/ISEProjects/Expr14/ShiftReg8b/ShiftReg8b.v)</SelectedItem>
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000202000000010000000100000064000000e5000000020000000000000000000000000200000064ffffffff000000810000000300000002000000e50000000100000003000000000000000100000003</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000202000000010000000100000064000000da000000020000000000000000000000000200000064ffffffff000000810000000300000002000000da0000000100000003000000000000000100000003</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >true</UserChangedColumnWidths>
-      <CurrentItem>ShiftReg8b (E:/wjz/Expr14/ShiftReg8b/ShiftReg8b.v)</CurrentItem>
+      <CurrentItem>ShiftReg8b (D:/Asudy/WorkSpace/LCDF_Expr/ISEProjects/Expr14/ShiftReg8b/ShiftReg8b.v)</CurrentItem>
    </ItemView>
    <ItemView engineview="SynthesisOnly" sourcetype="" guiview="Process" >
       <ClosedNodes>
