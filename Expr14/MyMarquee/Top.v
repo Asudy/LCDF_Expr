@@ -29,7 +29,7 @@ module Top(
 
     wire [7:0] num, dummyNum;
     wire [1:0] btn_out;
-	 wire [31:0] clk_div;
+	wire [31:0] clk_div;
     wire clk_1s, ser_in;
 
     assign BTNX4 = 0;
